@@ -823,6 +823,636 @@
       </script>
     </section>
 
+    <section data-tela="chat-da-negociacao" class="hidden">
+  <div id="chatContainer" class="flex flex-col h-[100dvh] bg-cinza-50">
+    <!-- Cabeçalho do chat -->
+    <header class="bg-white border-b border-cinza-200 px-4 py-3 flex items-center gap-3 flex-shrink-0 z-10">
+      <button onclick="mostrarTela('pedidos-e-acompanhamento')" class="w-9 h-9 rounded-full bg-cinza-100 flex items-center justify-center hover:bg-cinza-200 transition-colors active:scale-95 flex-shrink-0">
+        <svg class="w-5 h-5 text-cinza-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <div class="relative flex-shrink-0 cursor-pointer" onclick="abrirDetalheVendedor()">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-marca-400 to-marca-600 flex items-center justify-center text-white font-semibold text-sm font-display">MC</div>
+        <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></span>
+      </div>
+      <div class="flex-1 min-w-0 cursor-pointer" onclick="abrirDetalheVendedor()">
+        <h2 class="font-display font-semibold text-cinza-900 text-sm truncate">Marina Costa</h2>
+        <p class="text-xs text-green-600 font-medium">Online agora</p>
+      </div>
+      <button onclick="abrirDetalheAnuncio()" class="w-9 h-9 rounded-full bg-cinza-100 flex items-center justify-center hover:bg-cinza-200 transition-colors active:scale-95 flex-shrink-0">
+        <svg class="w-5 h-5 text-cinza-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </button>
+    </header>
+
+    <!-- Contexto do anúncio -->
+    <div onclick="abrirDetalheAnuncio()" class="bg-white border-b border-cinza-200 px-4 py-2.5 flex items-center gap-3 cursor-pointer hover:bg-cinza-50 transition-colors flex-shrink-0">
+      <div class="w-11 h-11 rounded-lg bg-gradient-to-br from-amber-100 to-orange-200 flex items-center justify-center flex-shrink-0">
+        <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="text-xs text-cinza-500 font-medium">Negociando</p>
+        <p class="text-sm font-semibold text-cinza-900 truncate">MacBook Air M2 — 256GB, Meia-noite</p>
+      </div>
+      <div class="text-right flex-shrink-0">
+        <p class="text-sm font-bold text-marca-700">R$ 5.400</p>
+        <p class="text-[10px] text-cinza-400">à vista</p>
+      </div>
+      <svg class="w-4 h-4 text-cinza-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </div>
+
+    <!-- Área de mensagens -->
+    <div id="chatMessages" class="flex-1 overflow-y-auto px-4 py-3 space-y-1">
+      <!-- Data separador -->
+      <div class="flex items-center gap-2 my-3">
+        <div class="flex-1 h-px bg-cinza-200"></div>
+        <span class="text-[11px] text-cinza-400 font-medium px-2">Hoje</span>
+        <div class="flex-1 h-px bg-cinza-200"></div>
+      </div>
+
+      <!-- Mensagem recebida -->
+      <div class="flex items-end gap-2 mb-2 msg-group">
+        <div class="w-7 h-7 rounded-full bg-gradient-to-br from-marca-400 to-marca-600 flex items-center justify-center text-white text-[10px] font-semibold flex-shrink-0 mb-5">MC</div>
+        <div class="max-w-[75%]">
+          <div class="bg-white border border-cinza-200 rounded-2xl rounded-bl-md px-3.5 py-2.5 shadow-sm">
+            <p class="text-sm text-cinza-800 leading-relaxed">Oi! Tudo bem? Vi seu anúncio do MacBook e me interessei.</p>
+          </div>
+          <span class="text-[10px] text-cinza-400 ml-1 mt-0.5 inline-block">09:14</span>
+        </div>
+      </div>
+
+      <!-- Mensagem enviada -->
+      <div class="flex items-end gap-2 mb-2 justify-end msg-group">
+        <div class="max-w-[75%]">
+          <div class="bg-marca-600 rounded-2xl rounded-br-md px-3.5 py-2.5">
+            <p class="text-sm text-white leading-relaxed">Oi Marina! Tudo ótimo, e com você? 😊 O Mac ainda está disponível, sim!</p>
+          </div>
+          <div class="flex items-center justify-end gap-1 mt-0.5 mr-1">
+            <span class="text-[10px] text-cinza-400">09:16</span>
+            <svg class="w-3.5 h-3.5 text-marca-500" fill="currentColor" viewBox="0 0 24 24"><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L1.83 12 .41 13.41z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Anexo recebido: imagem -->
+      <div class="flex items-end gap-2 mb-2 msg-group">
+        <div class="w-7 h-7 rounded-full bg-gradient-to-br from-marca-400 to-marca-600 flex items-center justify-center text-white text-[10px] font-semibold flex-shrink-0 mb-5">MC</div>
+        <div class="max-w-[75%]">
+          <div class="bg-white border border-cinza-200 rounded-2xl rounded-bl-md p-1.5 shadow-sm">
+            <div onclick="abrirVisualizador('imagem','macbook')" class="w-56 h-40 rounded-xl bg-gradient-to-br from-cinza-700 via-cinza-600 to-cinza-800 flex items-center justify-center cursor-pointer relative overflow-hidden group">
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+              <div class="text-center relative z-10">
+                <div class="w-16 h-16 mx-auto rounded-lg bg-gradient-to-br from-cinza-500 to-cinza-600 flex items-center justify-center mb-1.5">
+                  <svg class="w-8 h-8 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" stroke-width="1.5"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="3" stroke-width="1.5"/></svg>
+                </div>
+                <p class="text-white/70 text-[10px] font-medium">macbook_foto1.jpg</p>
+              </div>
+              <div class="absolute top-2 right-2 w-7 h-7 bg-black/40 rounded-full flex items-center justify-center">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-1 mt-0.5 ml-1">
+            <span class="text-[10px] text-cinza-400">09:18</span>
+            <svg class="w-3.5 h-3.5 text-cinza-300" fill="currentColor" viewBox="0 0 24 24"><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L7.48 12 .41 13.41z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="text-center my-1.5">
+        <span class="text-[11px] text-cinza-400 bg-cinza-100 px-3 py-1 rounded-full">Marina enviou uma imagem</span>
+      </div>
+
+      <!-- Mensagem recebida texto -->
+      <div class="flex items-end gap-2 mb-2 msg-group">
+        <div class="w-7 h-7 rounded-full bg-gradient-to-br from-marca-400 to-marca-600 flex items-center justify-center text-white text-[10px] font-semibold flex-shrink-0 mb-5">MC</div>
+        <div class="max-w-[75%]">
+          <div class="bg-white border border-cinza-200 rounded-2xl rounded-bl-md px-3.5 py-2.5 shadow-sm">
+            <p class="text-sm text-cinza-800 leading-relaxed">Aqui está uma foto do estado real do notebook. A bateria está com 87% de saúde.</p>
+          </div>
+          <span class="text-[10px] text-cinza-400 ml-1 mt-0.5 inline-block">09:18</span>
+        </div>
+      </div>
+
+      <!-- Anexo recebido: documento -->
+      <div class="flex items-end gap-2 mb-2 msg-group">
+        <div class="w-7 h-7 rounded-full bg-gradient-to-br from-marca-400 to-marca-600 flex items-center justify-center text-white text-[10px] font-semibold flex-shrink-0 mb-5">MC</div>
+        <div class="max-w-[75%]">
+          <div onclick="abrirVisualizador('pdf','nota')" class="bg-white border border-cinza-200 rounded-2xl rounded-bl-md p-3 shadow-sm cursor-pointer hover:bg-cinza-50 transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+              </div>
+              <div class="min-w-0">
+                <p class="text-sm font-medium text-cinza-900 truncate">nota_fiscal_macbook.pdf</p>
+                <p class="text-[11px] text-cinza-400">PDF • 245 KB</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-1 mt-0.5 ml-1">
+            <span class="text-[10px] text-cinza-400">09:20</span>
+            <svg class="w-3.5 h-3.5 text-cinza-300" fill="currentColor" viewBox="0 0 24 24"><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L7.48 12 .41 13.41z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mensagem enviada -->
+      <div class="flex items-end gap-2 mb-2 justify-end msg-group">
+        <div class="max-w-[75%]">
+          <div class="bg-marca-600 rounded-2xl rounded-br-md px-3.5 py-2.5">
+            <p class="text-sm text-white leading-relaxed">Perfeito! A bateria com 87% está ótima. Vou combinar um encontro no metrô Santa Cecília sábado à tarde?</p>
+          </div>
+          <div class="flex items-center justify-end gap-1 mt-0.5 mr-1">
+            <span class="text-[10px] text-cinza-400">09:22</span>
+            <svg class="w-3.5 h-3.5 text-marca-500" fill="currentColor" viewBox="0 0 24 24"><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L7.48 12 .41 13.41z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mensagem enviada -->
+      <div class="flex items-end gap-2 mb-2 justify-end msg-group">
+        <div class="max-w-[75%]">
+          <div class="bg-marca-600 rounded-2xl rounded-br-md px-3.5 py-2.5">
+            <p class="text-sm text-white leading-relaxed">Quer que eu leve carregador e case também?</p>
+          </div>
+          <div class="flex items-center justify-end gap-1 mt-0.5 mr-1">
+            <span class="text-[10px] text-cinza-400">09:22</span>
+            <svg class="w-3.5 h-3.5 text-marca-500" fill="currentColor" viewBox="0 0 24 24"><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L7.48 12 .41 13.41z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mensagem recebida -->
+      <div class="flex items-end gap-2 mb-2 msg-group">
+        <div class="w-7 h-7 rounded-full bg-gradient-to-br from-marca-400 to-marca-600 flex items-center justify-center text-white text-[10px] font-semibold flex-shrink-0 mb-5">MC</div>
+        <div class="max-w-[75%]">
+          <div class="bg-white border border-cinza-200 rounded-2xl rounded-bl-md px-3.5 py-2.5 shadow-sm">
+            <p class="text-sm text-cinza-800 leading-relaxed">Seria ótimo! Sim, sábado às 14h no Santa Cecília está perfeito para mim. 👍</p>
+          </div>
+          <span class="text-[10px] text-cinza-400 ml-1 mt-0.5 inline-block">09:25</span>
+        </div>
+      </div>
+
+      <!-- Aviso de sistema -->
+      <div class="bg-marca-50 border border-marca-200 rounded-xl px-4 py-2.5 my-3 flex items-start gap-2.5">
+        <svg class="w-5 h-5 text-marca-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        <div>
+          <p class="text-xs font-semibold text-marca-800">Negociação protegida</p>
+          <p class="text-[11px] text-marca-600 mt-0.5">Use o app para combinar detalhes. Não compartilhe dados pessoais antes da compra confirmada.</p>
+        </div>
+      </div>
+
+      <!-- Mensagem recebida -->
+      <div class="flex items-end gap-2 mb-2 msg-group">
+        <div class="w-7 h-7 rounded-full bg-gradient-to-br from-marca-400 to-marca-600 flex items-center justify-center text-white text-[10px] font-semibold flex-shrink-0 mb-5">MC</div>
+        <div class="max-w-[75%]">
+          <div class="bg-white border border-cinza-200 rounded-2xl rounded-bl-md px-3.5 py-2.5 shadow-sm">
+            <p class="text-sm text-cinza-800 leading-relaxed">Aceita R$ 5.200? É o máximo que consigo pagar no momento.</p>
+          </div>
+          <span class="text-[10px] text-cinza-400 ml-1 mt-0.5 inline-block">09:27</span>
+        </div>
+      </div>
+
+      <!-- Proposta -->
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3.5 mb-2 max-w-[85%]">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center">
+            <svg class="w-3.5 h-3.5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <span class="text-xs font-semibold text-amber-800">Proposta de R$ 5.200</span>
+        </div>
+        <p class="text-sm text-amber-700 mb-3">Marina quer comprar por R$ 5.200 à vista no encontro.</p>
+        <div class="flex gap-2">
+          <button onclick="chat_da_negociacao_aceitarProposta()" class="flex-1 bg-marca-600 text-white text-xs font-semibold py-2.5 rounded-xl hover:bg-marca-700 transition-colors active:scale-95">Aceitar R$ 5.200</button>
+          <button onclick="chat_da_negociacao_recusarProposta()" class="flex-1 bg-white border border-cinza-300 text-cinza-700 text-xs font-semibold py-2.5 rounded-xl hover:bg-cinza-50 transition-colors active:scale-95">Recusar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sugestões rápidas -->
+    <div id="chatSuggestions" class="px-3 py-2 bg-white border-t border-cinza-100 flex-shrink-0">
+      <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+        <button onclick="chat_da_negociacao_enviarSugestao('Aceita troca?')" class="flex-shrink-0 px-3.5 py-1.5 bg-cinza-100 hover:bg-marca-100 text-cinza-700 hover:text-marca-700 text-xs font-medium rounded-full border border-cinza-200 hover:border-marca-300 transition-all active:scale-95">Aceita troca?</button>
+        <button onclick="chat_da_negociacao_enviarSugestao('Ainda está disponível?')" class="flex-shrink-0 px-3.5 py-1.5 bg-cinza-100 hover:bg-marca-100 text-cinza-700 hover:text-marca-700 text-xs font-medium rounded-full border border-cinza-200 hover:border-marca-300 transition-all active:scale-95">Ainda está disponível?</button>
+        <button onclick="chat_da_negociacao_enviarSugestao('Pode enviar mais fotos?')" class="flex-shrink-0 px-3.5 py-1.5 bg-cinza-100 hover:bg-marca-100 text-cinza-700 hover:text-marca-700 text-xs font-medium rounded-full border border-cinza-200 hover:border-marca-300 transition-all active:scale-95">Mais fotos?</button>
+        <button onclick="chat_da_negociacao_enviarSugestao('Vamos fechar em R$ 5.400?')" class="flex-shrink-0 px-3.5 py-1.5 bg-cinza-100 hover:bg-marca-100 text-cinza-700 hover:text-marca-700 text-xs font-medium rounded-full border border-cinza-200 hover:border-marca-300 transition-all active:scale-95">R$ 5.400?</button>
+        <button onclick="chat_da_negociacao_enviarSugestao('Combinei com outra pessoa')" class="flex-shrink-0 px-3.5 py-1.5 bg-cinza-100 hover:bg-marca-100 text-cinza-700 hover:text-marca-700 text-xs font-medium rounded-full border border-cinza-200 hover:border-marca-300 transition-all active:scale-95">Já combinei</button>
+      </div>
+    </div>
+
+    <!-- Campo de mensagem -->
+    <div class="bg-white border-t border-cinza-200 px-3 py-2.5 flex items-end gap-2 flex-shrink-0 z-10">
+      <button onclick="document.getElementById('chatFileInput').click()" class="w-10 h-10 rounded-full bg-cinza-100 flex items-center justify-center hover:bg-cinza-200 transition-colors active:scale-90 flex-shrink-0">
+        <svg class="w-5 h-5 text-cinza-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/></svg>
+      </button>
+      <input type="file" id="chatFileInput" class="hidden" accept="image/*,.pdf,.doc,.docx" onchange="chat_da_negociacao_anexarArquivo(this)">
+      <div class="flex-1 relative">
+        <textarea id="chatInput" rows="1" placeholder="Escreva uma mensagem..." class="w-full bg-cinza-100 rounded-2xl px-4 py-2.5 text-sm text-cinza-800 placeholder-cinza-400 resize-none border-0 focus:outline-none focus:ring-2 focus:ring-marca-300 focus:bg-white transition-all max-h-24" onkeydown="chat_da_negociacao_handleKey(event)" oninput="chat_da_negociacao_autoResize(this)"></textarea>
+      </div>
+      <button onclick="chat_da_negociacao_enviarMensagem()" id="btnSend" class="w-10 h-10 rounded-full bg-marca-600 flex items-center justify-center hover:bg-marca-700 transition-colors active:scale-90 flex-shrink-0 disabled:opacity-40 disabled:cursor-not-allowed" disabled>
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Visualizador de anexos (imagem/pdf) -->
+  <div id="visualizadorAnexo" class="hidden fixed inset-0 bg-black/90 z-50 flex flex-col" onclick="fecharVisualizador()">
+    <div class="flex items-center justify-between px-4 py-3 flex-shrink-0">
+      <button onclick="fecharVisualizador()" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors active:scale-95">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <span id="visualizadorNome" class="text-white text-sm font-medium"></span>
+      <button onclick="chat_da_negociacao_baixarAnexo()" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors active:scale-95">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+      </button>
+    </div>
+    <div id="visualizadorConteudo" class="flex-1 flex items-center justify-center p-4">
+      <div class="text-center">
+        <div class="w-20 h-20 mx-auto rounded-2xl bg-white/10 flex items-center justify-center mb-3">
+          <svg class="w-10 h-10 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke-width="1.5"/></svg>
+        </div>
+        <p class="text-white/70 text-sm">Visualização do anexo</p>
+        <p class="text-white/40 text-xs mt-1">Toque nos botões acima para navegar</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal detalhe do vendedor -->
+  <div id="modalVendedor" class="hidden fixed inset-0 bg-black/50 z-40 flex items-end sm:items-center justify-center p-0 sm:p-4" onclick="if(event.target===this)fecharModal()">
+    <div class="bg-white rounded-t-3xl sm:rounded-2xl w-full max-w-sm p-6 transform transition-transform" onclick="event.stopPropagation()">
+      <div class="w-12 h-1 bg-cinza-300 rounded-full mx-auto mb-4 sm:hidden"></div>
+      <div class="text-center mb-5">
+        <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-marca-400 to-marca-600 flex items-center justify-center text-white text-2xl font-bold font-display mb-3">MC</div>
+        <h3 class="font-display font-bold text-lg text-cinza-900">Marina Costa</h3>
+        <div class="flex items-center justify-center gap-1.5 mt-1">
+          <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+          <span class="text-xs text-green-600 font-medium">Online agora</p>
+        </div>
+      </div>
+      <div class="space-y-2.5 mb-5">
+        <div class="flex items-center gap-3 bg-cinza-50 rounded-xl px-4 py-3">
+          <svg class="w-5 h-5 text-cinza-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+          <div>
+            <p class="text-xs text-cinza-500">Avaliação</p>
+            <p class="text-sm font-semibold text-cinza-900">4.8 ★ (127 avaliações)</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 bg-cinza-50 rounded-xl px-4 py-3">
+          <svg class="w-5 h-5 text-cinza-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <div>
+            <p class="text-xs text-cinza-500">Membro desde</p>
+            <p class="text-sm font-semibold text-cinza-900">Março de 2023</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 bg-cinza-50 rounded-xl px-4 py-3">
+          <svg class="w-5 h-5 text-cinza-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <div>
+            <p class="text-xs text-cinza-500">Verificada</p>
+            <p class="text-sm font-semibold text-cinza-900">CPF e e-mail confirmados</p>
+          </div>
+        </div>
+      </div>
+      <button onclick="chat_da_negociacao_denunciar()" class="w-full py-2.5 text-sm text-red-600 font-medium hover:bg-red-50 rounded-xl transition-colors active:scale-95">Denunciar usuário</button>
+      <button onclick="fecharModal()" class="w-full mt-2 py-3 bg-cinza-100 text-cinza-700 text-sm font-semibold rounded-xl hover:bg-cinza-200 transition-colors active:scale-95">Fechar</button>
+    </div>
+  </div>
+
+  <!-- Modal detalhe do anúncio -->
+  <div id="modalAnuncio" class="hidden fixed inset-0 bg-black/50 z-40 flex items-end sm:items-center justify-center p-0 sm:p-4" onclick="if(event.target===this)fecharModal()">
+    <div class="bg-white rounded-t-3xl sm:rounded-2xl w-full max-w-sm max-h-[80vh] overflow-y-auto" onclick="event.stopPropagation()">
+      <div class="sticky top-0 bg-white z-10 flex items-center justify-between px-5 pt-4 pb-3 border-b border-cinza-100">
+        <div class="w-12"></div>
+        <h3 class="font-display font-bold text-base text-cinza-900">Detalhe do Anúncio</h3>
+        <button onclick="fecharModal()" class="w-9 h-9 rounded-full bg-cinza-100 flex items-center justify-center hover:bg-cinza-200 transition-colors active:scale-95">
+          <svg class="w-5 h-5 text-cinza-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="p-5">
+        <div class="w-full h-44 rounded-2xl bg-gradient-to-br from-cinza-700 via-cinza-600 to-cinza-800 flex items-center justify-center mb-4">
+          <svg class="w-16 h-16 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" stroke-width="1"/><circle cx="12" cy="10" r="3" stroke-width="1"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h2 class="font-display font-bold text-lg text-cinza-900 mb-1">MacBook Air M2 — 256GB, Meia-noite</h2>
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-6 h-6 rounded-full bg-gradient-to-br from-marca-400 to-marca-600 flex items-center justify-center text-white text-[8px] font-semibold">MC</div>
+          <span class="text-sm text-cinza-600">Marina Costa</span>
+          <span class="text-xs text-cinza-400">• São Paulo, SP</span>
+        </div>
+        <div class="flex items-baseline gap-2 mb-4">
+          <span class="text-2xl font-bold text-marca-700">R$ 5.400</span>
+          <span class="text-sm text-cinza-400 line-through">R$ 6.999</span>
+          <span class="text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">-23%</span>
+        </div>
+        <div class="space-y-2 mb-5">
+          <div class="flex items-center gap-2 text-sm text-cinza-600">
+            <svg class="w-4 h-4 text-cinza-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span>Chip M2 — 8 núcleos CPU, 10 GPU</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-cinza-600">
+            <svg class="w-4 h-4 text-cinza-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span>8GB RAM unificada</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-cinza-600">
+            <svg class="w-4 h-4 text-cinza-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span>256GB SSD</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-cinza-600">
+            <svg class="w-4 h-4 text-cinza-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span>Bateria: 87% de saúde</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-cinza-600">
+            <svg class="w-4 h-4 text-cinza-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span>Garantia Apple até out/2025</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-cinza-600">
+            <svg class="w-4 h-4 text-cinza-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span>Nota fiscal inclusa</span>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="fecharModal();toast('Anúncio salvo nos favoritos','ok')" class="flex-1 py-3 bg-marca-600 text-white font-semibold rounded-xl hover:bg-marca-700 transition-colors active:scale-95 text-sm">Salvar anúncio</button>
+          <button onclick="fecharModal()" class="px-4 py-3 bg-cinza-100 text-cinza-700 font-semibold rounded-xl hover:bg-cinza-200 transition-colors active:scale-95">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const chatInput = document.getElementById('chatInput');
+  const btnSend = document.getElementById('btnSend');
+
+  if(chatInput){
+    chatInput.addEventListener('input', function(){
+      btnSend.disabled = !this.value.trim();
+    });
+  }
+
+  window.chat_da_negociacao_enviarMensagem = function(){
+    const input = document.getElementById('chatInput');
+    const texto = input.value.trim();
+    if(!texto) return;
+
+    const container = document.getElementById('chatMessages');
+    const now = new Date();
+    const hora = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+
+    const msgHtml = `
+      <div class="flex items-end gap-2 mb-2 justify-end msg-group" style="animation: fadeInUp 0.3s ease-out">
+        <div class="max-w-[75%]">
+          <div class="bg-marca-600 rounded-2xl rounded-br-md px-3.5 py-2.5">
+            <p class="text-sm text-white leading-relaxed">${chat_da_negociacao_escaparHTML(texto)}</p>
+          </div>
+          <div class="flex items-center justify-end gap-1 mt-0.5 mr-1">
+            <span class="text-[10px] text-cinza-400">${hora}</span>
+            <svg class="w-3.5 h-3.5 text-cinza-300" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+        </div>
+      </div>`;
+
+    container.insertAdjacentHTML('beforeend', msgHtml);
+    input.value = '';
+    input.style.height = 'auto';
+    btnSend.disabled = true;
+    chat_da_negociacao_scrollToBottom();
+
+    // Simula resposta automática
+    setTimeout(function(){
+      chat_da_negociacao_simularResposta(texto);
+    }, 2000 + Math.random() * 2000);
+  };
+
+  window.chat_da_negociacao_enviarSugestao = function(texto){
+    const input = document.getElementById('chatInput');
+    input.value = texto;
+    input.focus();
+    btnSend.disabled = false;
+  };
+
+  window.chat_da_negociacao_handleKey = function(e){
+    if(e.key === 'Enter' && !e.shiftKey){
+      e.preventDefault();
+      chat_da_negociacao_enviarMensagem();
+    }
+  };
+
+  window.chat_da_negociacao_autoResize = function(el){
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 96) + 'px';
+  };
+
+  window.chat_da_negociacao_anexarArquivo = function(input){
+    if(input.files && input.files[0]){
+      toast('Arquivo selecionado: ' + input.files[0].name, 'info');
+      setTimeout(function(){
+        chat_da_negociacao_enviarAnexo(input.files[0]);
+        input.value = '';
+      }, 500);
+    }
+  };
+
+  window.chat_da_negociacao_enviarAnexo = function(arquivo){
+    const container = document.getElementById('chatMessages');
+    const now = new Date();
+    const hora = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+    const isImagem = arquivo.type.startsWith('image/');
+    const isPDF = arquivo.type === 'application/pdf';
+
+    if(isImagem){
+      const html = `
+        <div class="flex items-end gap-2 mb-2 justify-end msg-group" style="animation: fadeInUp 0.3s ease-out">
+          <div class="max-w-[75%]">
+            <div class="bg-marca-600 rounded-2xl rounded-br-md p-1">
+              <div class="w-44 h-32 rounded-xl bg-gradient-to-br from-marca-400 to-marca-600 flex items-center justify-center">
+                <div class="text-center">
+                  <svg class="w-8 h-8 text-white/60 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke-width="1.5"/></svg>
+                  <p class="text-white/70 text-[10px]">${arquivo.name}</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-1 mt-0.5 mr-1">
+              <span class="text-[10px] text-cinza-400">${hora}</span>
+              <svg class="w-3.5 h-3.5 text-cinza-300" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+          </div>
+        </div>`;
+      container.insertAdjacentHTML('beforeend', html);
+    } else if(isPDF){
+      const html = `
+        <div class="flex items-end gap-2 mb-2 justify-end msg-group" style="animation: fadeInUp 0.3s ease-out">
+          <div class="max-w-[75%]">
+            <div class="bg-marca-600 rounded-2xl rounded-br-md p-3">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-medium text-white truncate">${arquivo.name}</p>
+                  <p class="text-[11px] text-white/60">PDF • ${(arquivo.size/1024).toFixed(0)} KB</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-1 mt-0.5 mr-1">
+              <span class="text-[10px] text-cinza-400">${hora}</span>
+              <svg class="w-3.5 h-3.5 text-cinza-300" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+          </div>
+        </div>`;
+      container.insertAdjacentHTML('beforeend', html);
+    } else {
+      toast('Arquivo enviado com sucesso', 'ok');
+      return;
+    }
+    chat_da_negociacao_scrollToBottom();
+    toast('Arquivo enviado com sucesso', 'ok');
+  };
+
+  window.chat_da_negociacao_aceitarProposta = function(){
+    toast('Proposta aceita! Aguardando confirmação de pagamento.', 'ok');
+    const container = document.getElementById('chatMessages');
+    const now = new Date();
+    const hora = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+    const html = `
+      <div class="flex items-end gap-2 mb-2 justify-end msg-group" style="animation: fadeInUp 0.3s ease-out">
+        <div class="max-w-[75%]">
+          <div class="bg-marca-600 rounded-2xl rounded-br-md px-3.5 py-2.5">
+            <p class="text-sm text-white leading-relaxed">Aceito R$ 5.200! Vamos fechar sábado às 14h então. 👍</p>
+          </div>
+          <div class="flex items-center justify-end gap-1 mt-0.5 mr-1">
+            <span class="text-[10px] text-cinza-400">${hora}</span>
+            <svg class="w-3.5 h-3.5 text-marca-500" fill="currentColor" viewBox="0 0 24 24"><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L7.48 12 .41 13.41z"/></svg>
+          </div>
+        </div>
+      </div>`;
+    container.insertAdjacentHTML('beforeend', html);
+    chat_da_negociacao_scrollToBottom();
+  };
+
+  window.chat_da_negociacao_recusarProposta = function(){
+    toast('Você recusou a proposta de R$ 5.200.', 'info');
+    const container = document.getElementById('chatMessages');
+    const now = new Date();
+    const hora = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+    const html = `
+      <div class="flex items-end gap-2 mb-2 justify-end msg-group" style="animation: fadeInUp 0.3s ease-out">
+        <div class="max-w-[75%]">
+          <div class="bg-marca-600 rounded-2xl rounded-br-md px-3.5 py-2.5">
+            <p class="text-sm text-white leading-relaxed">Desculpe, não consigo abaixar abaixo de R$ 5.400. O valor já está bem justo. 😊</p>
+          </div>
+          <div class="flex items-center justify-end gap-1 mt-0.5 mr-1">
+            <span class="text-[10px] text-cinza-400">${hora}</span>
+            <svg class="w-3.5 h-3.5 text-cinza-300" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+        </div>
+      </div>`;
+    container.insertAdjacentHTML('beforeend', html);
+    chat_da_negociacao_scrollToBottom();
+  };
+
+  window.chat_da_negociacao_simularResposta = function(msgUsuario){
+    const respostas = [
+      'Perfeito! Combinado então. 😊',
+      'Tudo bem para mim!',
+      'Certo, estou ansioso(a)!',
+      'Ok, combinado. Até sábado!',
+      'Perfeito, pode deixar.',
+      'Show! Vou confirmar minha presença.',
+      'Certo, combinado! 👍',
+    ];
+    const container = document.getElementById('chatMessages');
+    const now = new Date();
+    const hora = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+    const resposta = respostas[Math.floor(Math.random() * respostas.length)];
+
+    const html = `
+      <div class="flex items-end gap-2 mb-2 msg-group" style="animation: fadeInUp 0.3s ease-out">
+        <div class="w-7 h-7 rounded-full bg-gradient-to-br from-marca-400 to-marca-600 flex items-center justify-center text-white text-[10px] font-semibold flex-shrink-0 mb-5">MC</div>
+        <div class="max-w-[75%]">
+          <div class="bg-white border border-cinza-200 rounded-2xl rounded-bl-md px-3.5 py-2.5 shadow-sm">
+            <p class="text-sm text-cinza-800 leading-relaxed">${resposta}</p>
+          </div>
+          <span class="text-[10px] text-cinza-400 ml-1 mt-0.5 inline-block">${hora}</span>
+        </div>
+      </div>`;
+    container.insertAdjacentHTML('beforeend', html);
+    chat_da_negociacao_scrollToBottom();
+  };
+
+  window.abrirVisualizador = function(tipo, id){
+    const viewer = document.getElementById('visualizadorAnexo');
+    const nomeEl = document.getElementById('visualizadorNome');
+    const conteudoEl = document.getElementById('visualizadorConteudo');
+
+    if(tipo === 'imagem'){
+      nomeEl.textContent = 'macbook_foto1.jpg';
+      conteudoEl.innerHTML = `
+        <div class="w-full max-w-xs h-64 rounded-2xl bg-gradient-to-br from-cinza-700 via-cinza-600 to-cinza-800 flex items-center justify-center shadow-2xl">
+          <svg class="w-16 h-16 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" stroke-width="1"/><circle cx="12" cy="10" r="3" stroke-width="1"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M8 21h8M12 17v4"/></svg>
+        </div>`;
+    } else if(tipo === 'pdf'){
+      nomeEl.textContent = 'nota_fiscal_macbook.pdf';
+      conteudoEl.innerHTML = `
+        <div class="w-full max-w-xs bg-white rounded-2xl shadow-2xl overflow-hidden">
+          <div class="bg-red-500 px-4 py-3 flex items-center gap-2">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            <span class="text-white text-sm font-medium">PDF Viewer</span>
+          </div>
+          <div class="p-6 space-y-3">
+            <div class="h-3 bg-cinza-200 rounded w-3/4"></div>
+            <div class="h-3 bg-cinza-200 rounded w-full"></div>
+            <div class="h-3 bg-cinza-200 rounded w-5/6"></div>
+            <div class="h-3 bg-cinza-200 rounded w-2/3"></div>
+            <div class="h-3 bg-cinza-200 rounded w-full"></div>
+            <div class="h-3 bg-cinza-200 rounded w-4/5"></div>
+            <div class="h-16 bg-cinza-100 rounded-lg mt-4"></div>
+            <div class="h-3 bg-cinza-200 rounded w-3/4"></div>
+            <div class="h-3 bg-cinza-200 rounded w-full"></div>
+            <div class="h-3 bg-cinza-200 rounded w-1/2"></div>
+          </div>
+        </div>`;
+    }
+
+    viewer.classList.remove('hidden');
+  };
+
+  window.fecharVisualizador = function(){
+    document.getElementById('visualizadorAnexo').classList.add('hidden');
+  };
+
+  window.chat_da_negociacao_baixarAnexo = function(){
+    toast('Iniciando download do arquivo...', 'info');
+  };
+
+  window.abrirDetalheVendedor = function(){
+    document.getElementById('modalVendedor').classList.remove('hidden');
+  };
+
+  window.abrirDetalheAnuncio = function(){
+    document.getElementById('modalAnuncio').classList.remove('hidden');
+  };
+
+  window.chat_da_negociacao_denunciar = function(){
+    fecharModal();
+    toast('Denúncia enviada. Nossa equipe irá analisar.', 'ok');
+  };
+
+  window.chat_da_negociacao_scrollToBottom = function(){
+    const container = document.getElementById('chatMessages');
+    setTimeout(function(){
+      container.scrollTop = container.scrollHeight;
+    }, 50);
+  };
+
+  window.chat_da_negociacao_escaparHTML = function(str){
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  };
+
+  // Scroll inicial para o final
+  setTimeout(chat_da_negociacao_scrollToBottom, 100);
+})();
+</script>
+
     <!-- TELAS -->
     </main>
 
