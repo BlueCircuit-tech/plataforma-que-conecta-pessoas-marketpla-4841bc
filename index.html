@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Vizinho — Conectamos pessoas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            marca: {
+              50: '#effefb', 100: '#c8fff4', 200: '#97fee9',
+              300: '#54f5d7', 400: '#1de4bf', 500: '#06cba7',
+              600: '#089f88', 700: '#0d7f6f', 800: '#116459',
+              900: '#0d5249', 950: '#00312d',
+            },
+            destaque: {
+              50: '#fff8e1', 100: '#ffecb3', 200: '#ffd54f',
+              300: '#ffca28', 400: '#ffc107', 500: '#ffb300',
+              600: '#ff8f00', 700: '#e67700',
+            },
+          },
+          fontFamily: {
+            display: ['Fraunces', 'Georgia', 'serif'],
+            body: ['Figtree', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { height: 100%; overscroll-behavior: none; }
+    body { background: #0f172a; font-family: 'Figtree', system-ui, sans-serif; }
+
+    .app-frame {
+      animation: frameIn .6s ease-out both;
+    }
+    @keyframes frameIn {
+      from { opacity: 0; transform: translateY(16px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes telaIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    [data-tela]:not(.hidden) {
+      animation: telaIn .25s ease-out both;
+    }
+    [data-tela].hidden { display: none !important; }
+
+    .scroll-area { scrollbar-width: thin; scrollbar-color: rgba(6,203,167,.2) transparent; }
+    .scroll-area::-webkit-scrollbar { width: 3px; }
+    .scroll-area::-webkit-scrollbar-thumb { background: rgba(6,203,167,.25); border-radius: 3px; }
+
+    *:focus-visible { outline: 2px solid #06cba7; outline-offset: 2px; border-radius: 4px; }
+
+    .ativo { color: #06cba7; }
+    .ativo .nav-dot { opacity: 1; transform: scaleX(1); }
+
+    .badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 2px 10px; border-radius: 9999px; font-size: .7rem;
+      font-weight: 600; letter-spacing: .02em; white-space: nowrap;
+    }
+    .card {
+      background: #fff; border-radius: 16px;
+      border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,.06);
+      transition: box-shadow .2s, transform .15s;
+    }
+    .card:active { transform: scale(.985); box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: .5rem; padding: .75rem 1.5rem; border-radius: 14px;
+      font-weight: 600; font-size: .9rem; border: none; cursor: pointer;
+      transition: background .18s, transform .1s, box-shadow .18s;
+      font-family: inherit;
+    }
+    .btn:active { transform: scale(.97); }
+    .btn-primario { background: #06cba7; color: #fff; box-shadow: 0 2px 8px rgba(6,203,167,.3); }
+    .btn-primario:hover { background: #05b897; }
+    .btn-secundario { background: #f1f5f9; color: #334155; }
+    .btn-secundario:hover { background: #e2e8f0; }
+    .btn-outline { background: transparent; border: 1.5px solid #06cba7; color: #06cba7; }
+    .btn-outline:hover { background: #effefb; }
+    .btn-perigo { background: #ef4444; color: #fff; }
+    .btn-perigo:hover { background: #dc2626; }
+
+    .nav-dot {
+      width: 4px; height: 4px; border-radius: 50%; background: #06cba7;
+      opacity: 0; transform: scaleX(0); transition: all .22s;
+    }
+    .toast-enter { animation: toastIn .3s ease-out both; }
+    .toast-exit { animation: toastOut .28s ease-in both; }
+    @keyframes toastIn { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes toastOut { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(40px); } }
+    @keyframes modalIn { from { opacity: 0; transform: scale(.94) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    .modal-card { animation: modalIn .22s ease-out both; }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-0 sm:p-6">
+
+  <div class="app-frame w-full max-w-[390px] h-[100dvh] sm:h-[844px] sm:rounded-[44px] bg-slate-50 sm:border-[7px] sm:border-slate-800 sm:shadow-2xl sm:shadow-black/60 overflow-hidden relative flex flex-col">
+
+    <!-- Status bar -->
+    <div class="flex items-center justify-between px-7 pt-3 pb-1 bg-white select-none flex-shrink-0">
+      <span class="text-xs font-semibold text-slate-900 tracking-tight" id="relogio">09:41</span>
+      <div class="flex items-center gap-1.5">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="currentColor" class="text-slate-800">
+          <rect x="0" y="5" width="3" height="7" rx=".8"/><rect x="4.5" y="4" width="3" height="8" rx=".8"/>
+          <rect x="9" y="2.5" width="3" height="9.5" rx=".8"/><rect x="13.5" y="1" width="3" height="11" rx=".8"/>
+        </svg>
+        <svg width="15" height="12" viewBox="0 0 15 12" fill="currentColor" class="text-slate-800">
+          <path d="M7.5 2.5C10.6 2.5 13.5 3.8 13.5 6.5v3.5H1.5V6.5C1.5 3.8 4.4 2.5 7.5 2.5z"/>
+          <rect x="5.5" y="9.5" width="4" height="2" rx=".6"/>
+        </svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="currentColor" class="text-slate-800">
+          <rect x="0" y="0" width="22" height="12" rx="3" stroke="currentColor" stroke-width="1" fill="none"/>
+          <rect x="23" y="4" width="2" height="4" rx=".5"/>
+          <rect x="1.5" y="1.5" width="17" height="9" rx="1.5" fill="#22c55e"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- App header -->
+    <header class="bg-white border-b border-slate-100 px-5 py-3 flex items-center justify-between flex-shrink-0">
+      <div class="flex items-center gap-2.5">
+        <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+          <rect width="34" height="34" rx="10" fill="#06cba7"/>
+          <path d="M17 7.5C12.5 7.5 9 10.2 9 14s3.5 7.5 8 7.5 8-2.7 8-6.5S21.5 7.5 17 7.5zm3.8 4.6h.1c.5 0 .8.3.8.8v.5c0 .5-.4.8-.9.8h-.1c-.5 0-.8-.3-.8-.8v-.5c0-.5.4-.8.9-.8zm-7.5 0h.1c.5 0 .8.3.8.8v.5c0 .5-.4.8-.9.8h-.1c-.5 0-.8-.3-.8-.8v-.5c0-.5.4-.8.9-.8zm3.7 3.3c1.5 0 2.8-.6 3.7-1.6.3-.3.5-.6.5-1 0-.4-.2-.8-.5-1-.3-.3-.7-.4-1.1-.4s-.8.1-1.1.4c-.1.1-.2.2-.3.3l-.8.8c-.2.2-.4.2-.6.1s-.3-.3-.3-.5l.1-.2c.1-.3.2-.6.4-.9.3-.5.8-.9 1.4-1.1.2-.1.4-.1.6-.1s.4 0 .6.1c.5.2.8.6.8 1.1 0 .5-.3 1-.8 1.2-.3.1-.7 0-1-.3l-.9-.9c-.2-.2-.5-.3-.8-.3s-.6.1-.8.3c-.2.2-.3.5-.3.8 0 .5.2.9.6 1.2.7.6 1.6.9 2.7.9z" fill="#fff"/>
+        </svg>
+        <span class="font-display font-700 text-lg text-slate-900 tracking-tight">Vizinho</span>
+      </div>
+      <button class="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center hover:bg-slate-100 transition-colors" onclick="abrirModal('<div class=\'text-center py-4\'><p class=\'text-slate-500 text-sm\'>Você receberá novidades e alertas de novos anúncios diretamente no seu WhatsApp.</p></div>', 'Notificações')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-600">
+          <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+        </svg>
+        <span class="absolute -mt-5 ml-3 w-2.5 h-2.5 bg-destaque-500 rounded-full border-2 border-white"></span>
+      </button>
+    </header>
+
+    <!-- Main content -->
+    <main id="conteudo-app" class="flex-1 overflow-y-auto scroll-area bg-slate-50 relative">
+      <!-- TELAS -->
+    </main>
+
+    <!-- Bottom navigation -->
+    <nav class="bg-white border-t border-slate-100 flex items-center justify-around px-1 pb-1 pt-1.5 flex-shrink-0 safe-bottom z-50">
+      <button data-nav="home-vitrine" onclick="mostrarTela('home-vitrine')" class="ativo flex flex-col items-center gap-1 py-1.5 px-2 min-w-[54px] rounded-xl transition-colors duration-200 hover:bg-slate-50">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span class="text-[10px] font-medium">Início</span>
+        <div class="nav-dot"></div>
+      </button>
+      <button data-nav="pedidos-e-acompanhamento" onclick="mostrarTela('pedidos-e-acompanhamento')" class="flex flex-col items-center gap-1 py-1.5 px-2 min-w-[54px] rounded-xl text-slate-400 transition-colors duration-200 hover:bg-slate-50">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 7h20"/><path d="M7 13h4"/><path d="M7 17h10"/>
+        </svg>
+        <span class="text-[10px] font-medium">Pedidos</span>
+        <div class="nav-dot"></div>
+      </button>
+      <button data-nav="chat-da-negociacao" onclick="mostrarTela('chat-da-negociacao')" class="flex flex-col items-center gap-1 py-1.5 px-2 min-w-[54px] rounded-xl text-slate-400 transition-colors duration-200 hover:bg-slate-50 relative">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        <span class="text-[10px] font-medium">Chat</span>
+        <div class="nav-dot"></div>
+        <span class="absolute top-0 right-2 w-4 h-4 bg-destaque-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center leading-none">3</span>
+      </button>
+      <button data-nav="meus-anuncios" onclick="mostrarTela('meus-anuncios')" class="flex flex-col items-center gap-1 py-1.5 px-2 min-w-[54px] rounded-xl text-slate-400 transition-colors duration-200 hover:bg-slate-50">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
+        </svg>
+        <span class="text-[10px] font-medium">Anúncios</span>
+        <div class="nav-dot"></div>
+      </button>
+      <button data-nav="perfil-e-conta" onclick="mostrarTela('perfil-e-conta')" class="flex flex-col items-center gap-1 py-1.5 px-2 min-w-[54px] rounded-xl text-slate-400 transition-colors duration-200 hover:bg-slate-50">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span class="text-[10px] font-medium">Perfil</span>
+        <div class="nav-dot"></div>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Toast container -->
+  <div id="toast-container" class="fixed top-6 right-6 z-[9999] flex flex-col gap-2 pointer-events-none" style="max-width:320px;"></div>
+
+  <!-- Modal -->
+  <div id="modal-overlay" class="fixed inset-0 z-[9998] bg-black/50 hidden items-center justify-center p-6 backdrop-blur-sm">
+    <div id="modal-card" class="modal-card bg-white rounded-2xl w-full max-w-sm max-h-[80vh] flex flex-col shadow-2xl">
+      <div class="flex items-center justify-between p-5 border-b border-slate-100">
+        <h3 id="modal-titulo" class="font-display font-700 text-lg text-slate-900">Título</h3>
+        <button onclick="fecharModal()" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-slate-100 transition-colors flex-shrink-0 ml-3">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div id="modal-corpo" class="p-5 overflow-y-auto scroll-area text-slate-600 text-sm leading-relaxed"></div>
+      <div class="p-4 border-t border-slate-100 flex justify-end">
+        <button onclick="fecharModal()" class="btn btn-secundario text-sm py-2 px-5">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ─── Toast ────────────────────────────────────────────────────────
+    function toast(mensagem, tipo) {
+      var c = document.getElementById('toast-container');
+      var icones = { ok: '✓', erro: '✕', info: 'ℹ' };
+      var cores = { ok: 'bg-emerald-600', erro: 'bg-red-600', info: 'bg-sky-600' };
+      var el = document.createElement('div');
+      el.className = 'toast-enter pointer-events-auto flex items-center gap-2.5 px-4 py-3 rounded-2xl text-white text-sm font-medium shadow-lg ' + (cores[tipo] || cores.info);
+      el.innerHTML = '<span class="text-base">' + (icones[tipo] || '') + '</span>' + mensagem;
+      c.appendChild(el);
+      setTimeout(function () {
+        el.classList.remove('toast-enter');
+        el.classList.add('toast-exit');
+        setTimeout(function () { el.remove(); }, 300);
+      }, 3000);
+    }
+
+    // ─── Modal ────────────────────────────────────────────────────────
+    function abrirModal(html, titulo) {
+      document.getElementById('modal-titulo').textContent = titulo || '';
+      document.getElementById('modal-corpo').innerHTML = html;
+      var o = document.getElementById('modal-overlay');
+      o.classList.remove('hidden');
+      o.classList.add('flex');
+    }
+    function fecharModal() {
+      var o = document.getElementById('modal-overlay');
+      o.classList.add('hidden');
+      o.classList.remove('flex');
+    }
+    document.getElementById('modal-overlay').addEventListener('click', function (e) {
+      if (e.target === this) fecharModal();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') fecharModal();
+    });
+
+    // ─── Formatadores ────────────────────────────────────────────────
+    function brl(valor) {
+      return 'R$ ' + Number(valor).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+    function dataBR(iso) {
+      if (!iso) return '—';
+      var d = new Date(iso + 'T03:00:00');
+      return d.toLocaleDateString('pt-BR');
+    }
+
+    // ─── Utilitários auxiliares ───────────────────────────────────────
+    function avatarIniciais(nome, cor) {
+      var p = nome.split(' ');
+      var ini = (p[0][0] || '') + (p.length > 1 ? (p[p.length - 1][0] || '') : '');
+      return '<div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0" style="background:' + (cor || '#06cba7') + '">' + ini.toUpperCase() + '</div>';
+    }
+
+    // ─── Ajudantes de UI (para uso nas telas) ─────────────────────────
+    function estrelas(n) {
+      var s = '';
+      for (var i = 1; i <= 5; i++) {
+        s += i <= n ? '★' : (i - 0.5 <= n ? '½' : '☆');
+      }
+      return s;
+    }
+
+    // ─── Relógio da barra de status ──────────────────────────────────
+    function atualizarRelogio() {
+      var d = new Date();
+      document.getElementById('relogio').textContent =
+        String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+    }
+    atualizarRelogio();
+    setInterval(atualizarRelogio, 30000);
+
+    // ─── Roteador ────────────────────────────────────────────────────
+    function mostrarTela(id) {
+      document.querySelectorAll('[data-tela]').forEach(function (s) {
+        s.classList.toggle('hidden', s.dataset.tela !== id);
+      });
+      document.querySelectorAll('[data-nav]').forEach(function (b) {
+        var ativo = b.dataset.nav === id;
+        b.classList.toggle('ativo', ativo);
+        b.classList.toggle('text-marca-600', ativo);
+        b.classList.toggle('text-slate-400', !ativo);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      mostrarTela('home-vitrine');
+    });
+  </script>
+</body>
+</html>
