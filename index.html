@@ -146,7 +146,320 @@
 
     <!-- Main content -->
     <main id="conteudo-app" class="flex-1 overflow-y-auto scroll-area bg-slate-50 relative">
-      <!-- TELAS -->
+      <section data-tela="home-vitrine" class="hidden">
+      <div class="px-4 pt-4 pb-24 overflow-y-auto h-screen" style="padding-bottom:96px">
+        <!-- Header: saudação + busca -->
+        <div class="mb-4">
+          <p class="text-sm text-gray-500 font-body">Bom dia, Carlos 👋</p>
+          <h1 class="text-xl font-display font-bold text-gray-900">Encontre o que precisa</h1>
+        </div>
+
+        <!-- Busca -->
+        <div class="flex items-center gap-2 mb-4">
+          <button onclick="home_vitrine_abrirBusca()" class="flex-1 flex items-center gap-2 bg-gray-100 rounded-xl px-4 py-3 text-left text-gray-400 text-sm active:scale-[0.98] transition-transform">
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
+            <span>Buscar produtos, serviços...</span>
+          </button>
+          <button onclick="mostrarTela('perfil-e-conta')" class="relative p-3 bg-gray-100 rounded-xl active:scale-95 transition-transform">
+            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white text-[10px] font-bold flex items-center justify-center">3</span>
+          </button>
+        </div>
+
+        <!-- Categorias -->
+        <div class="mb-5">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-base font-display font-semibold text-gray-900">Categorias</h2>
+            <button onclick="mostrarTela('home-vitrine')" class="text-xs font-medium" style="color:var(--marca-600)">Ver todas</button>
+          </div>
+          <div class="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4" style="scrollbar-width:none;-ms-overflow-style:none">
+            <button onclick="home_vitrine_filtrarCategoria('Eletrônicos')" class="flex flex-col items-center gap-1.5 flex-shrink-0 active:scale-95 transition-transform">
+              <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:#EFF6FF"><svg class="w-7 h-7" style="color:var(--marca-600)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M8 21h8M12 17v4"/></svg></div>
+              <span class="text-xs text-gray-600 font-medium whitespace-nowrap">Eletrônicos</span>
+            </button>
+            <button onclick="home_vitrine_filtrarCategoria('Veículos')" class="flex flex-col items-center gap-1.5 flex-shrink-0 active:scale-95 transition-transform">
+              <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:#FEF3C7"><svg class="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17h.01M16 17h.01M5 17a2 2 0 01-2-2V9a2 2 0 012-2h1l2-3h8l2 3h1a2 2 0 012 2v6a2 2 0 01-2 2M5 17h14"/><circle cx="7.5" cy="17.5" r="1.5" fill="currentColor"/><circle cx="16.5" cy="17.5" r="1.5" fill="currentColor"/></svg></div>
+              <span class="text-xs text-gray-600 font-medium whitespace-nowrap">Veículos</span>
+            </button>
+            <button onclick="home_vitrine_filtrarCategoria('Imóveis')" class="flex flex-col items-center gap-1.5 flex-shrink-0 active:scale-95 transition-transform">
+              <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:#ECFDF5"><svg class="w-7 h-7 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></div>
+              <span class="text-xs text-gray-600 font-medium whitespace-nowrap">Imóveis</span>
+            </button>
+            <button onclick="home_vitrine_filtrarCategoria('Serviços')" class="flex flex-col items-center gap-1.5 flex-shrink-0 active:scale-95 transition-transform">
+              <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:#FDF2F8"><svg class="w-7 h-7 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3" stroke-width="2"/></svg></div>
+              <span class="text-xs text-gray-600 font-medium whitespace-nowrap">Serviços</span>
+            </button>
+            <button onclick="home_vitrine_filtrarCategoria('Móveis')" class="flex flex-col items-center gap-1.5 flex-shrink-0 active:scale-95 transition-transform">
+              <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:#FFF7ED"><svg class="w-7 h-7 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>
+              <span class="text-xs text-gray-600 font-medium whitespace-nowrap">Móveis</span>
+            </button>
+            <button onclick="home_vitrine_filtrarCategoria('Moda')" class="flex flex-col items-center gap-1.5 flex-shrink-0 active:scale-95 transition-transform">
+              <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:#F0FDF4"><svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg></div>
+              <span class="text-xs text-gray-600 font-medium whitespace-nowrap">Moda</span>
+            </button>
+            <button onclick="home_vitrine_filtrarCategoria('Esportes')" class="flex flex-col items-center gap-1.5 flex-shrink-0 active:scale-95 transition-transform">
+              <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:#F5F3FF"><svg class="w-7 h-7 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M12 2a14.5 14.5 0 000 20 14.5 14.5 0 000-20zM2 12h20"/></svg></div>
+              <span class="text-xs text-gray-600 font-medium whitespace-nowrap">Esportes</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Banner promocional -->
+        <div onclick="home_vitrine_clicouBanner()" class="rounded-2xl p-5 mb-5 text-white active:scale-[0.98] transition-transform cursor-pointer relative overflow-hidden" style="background:linear-gradient(135deg, var(--marca-600), var(--marca-800))">
+          <div class="relative z-10">
+            <span class="inline-block px-2.5 py-1 bg-white/20 rounded-full text-xs font-semibold mb-2">Novidade</span>
+            <h3 class="font-display font-bold text-lg mb-1">Frete grátis hoje!</h3>
+            <p class="text-sm text-white/80 mb-3">Em compras acima de R$ 150</p>
+            <span class="inline-flex items-center gap-1 text-sm font-semibold">Aproveitar <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></span>
+          </div>
+          <div class="absolute -right-4 -bottom-6 opacity-10">
+            <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          </div>
+        </div>
+
+        <!-- Anúncios em destaque -->
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-base font-display font-semibold text-gray-900">🔥 Anúncios em destaque</h2>
+          <button onclick="home_vitrine_verTodos()" class="text-xs font-medium" style="color:var(--marca-600)">Ver todos</button>
+        </div>
+
+        <div id="home-vitrine-lista" class="grid grid-cols-2 gap-3">
+        </div>
+
+        <!-- Estado vazio (oculto por padrão) -->
+        <div id="home-vitrine-vazio" class="hidden text-center py-12">
+          <svg class="w-16 h-16 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
+          <p class="text-gray-500 font-body text-sm">Nenhum anúncio encontrado</p>
+          <p class="text-gray-400 text-xs mt-1">Tente mudar os filtros da busca</p>
+        </div>
+      </div>
+
+      <!-- Modal de busca -->
+      <div id="home-vitrine-modal-busca" class="hidden fixed inset-0 z-50 bg-black/50 flex items-end justify-center" onclick="if(event.target===this)home_vitrine_fecharBusca()">
+        <div class="bg-white rounded-t-3xl w-full max-w-[430px] p-5 pb-8 transform transition-transform" onclick="event.stopPropagation()">
+          <div class="w-10 h-1 bg-gray-200 rounded-full mx-auto mb-4"></div>
+          <h3 class="font-display font-bold text-lg text-gray-900 mb-4">Buscar</h3>
+          <div class="flex items-center gap-2 bg-gray-100 rounded-xl px-4 py-3 mb-4">
+            <svg class="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
+            <input id="home-vitrine-input-busca" type="text" placeholder="O que você está procurando?" class="bg-transparent outline-none flex-1 text-sm font-body text-gray-900 placeholder:text-gray-400" oninput="home_vitrine_filtrarLista()">
+          </div>
+
+          <!-- Filtros -->
+          <div class="mb-4">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Faixa de preço</label>
+            <div class="flex gap-2 items-center">
+              <input id="home-vitrine-preco-min" type="number" placeholder="Min" class="w-full bg-gray-50 rounded-xl px-3 py-2.5 text-sm outline-none border border-gray-200 focus:border-gray-400 transition-colors" oninput="home_vitrine_filtrarLista()">
+              <span class="text-gray-400">—</span>
+              <input id="home-vitrine-preco-max" type="number" placeholder="Max" class="w-full bg-gray-50 rounded-xl px-3 py-2.5 text-sm outline-none border border-gray-200 focus:border-gray-400 transition-colors" oninput="home_vitrine_filtrarLista()">
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2 block">Distância máxima</label>
+            <div class="flex gap-2">
+              <button onclick="home_vitrine_setDistancia(this, 5)" class="home-vitrine-dist-btn flex-1 py-2.5 rounded-xl text-sm font-medium border border-gray-200 text-gray-600 bg-white active:scale-95 transition-all">5 km</button>
+              <button onclick="home_vitrine_setDistancia(this, 20)" class="home-vitrine-dist-btn flex-1 py-2.5 rounded-xl text-sm font-medium border text-gray-600 bg-white active:scale-95 transition-all">20 km</button>
+              <button onclick="home_vitrine_setDistancia(this, 50)" class="home-vitrine-dist-btn flex-1 py-2.5 rounded-xl text-sm font-medium border text-gray-600 bg-white active:scale-95 transition-all">50 km</button>
+              <button onclick="home_vitrine_setDistancia(this, 999)" class="home-vitrine-dist-btn flex-1 py-2.5 rounded-xl text-sm font-medium border text-gray-600 bg-white active:scale-95 transition-all">Tudo</button>
+            </div>
+          </div>
+
+          <button onclick="home_vitrine_aplicarFiltros()" class="w-full py-3.5 rounded-xl text-white font-semibold text-sm active:scale-[0.98] transition-all" style="background:var(--marca-600)">Aplicar filtros</button>
+        </div>
+      </div>
+
+      <!-- Modal de detalhe do anúncio -->
+      <div id="home-vitrine-modal-detalhe" class="hidden fixed inset-0 z-50 bg-black/50 flex items-end justify-center" onclick="if(event.target===this)fecharModal()">
+        <div class="bg-white rounded-t-3xl w-full max-w-[430px] max-h-[90vh] overflow-y-auto pb-8" onclick="event.stopPropagation()">
+          <div class="w-10 h-1 bg-gray-200 rounded-full mx-auto mt-3 mb-2"></div>
+          <div id="home-vitrine-detalhe-conteudo"></div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+    (function() {
+      const anuncios = [
+        { id: 1, titulo: 'iPhone 15 Pro Max 256GB', preco: 7499, categoria: 'Eletrônicos', local: 'São Paulo, SP', distancia: 3.2, foto: '📱', cor: '#3B82F6', vendedor: 'Ricardo Mendes', nota: 4.8, vendas: 47, descricao: 'iPhone 15 Pro Max na cor titânio natural, 256GB de armazenamento. Aparelho seminovo, sem marcas de uso, com todos os acessórios originais na caixa. Bateria com 94% de saúde.', condicao: 'Usado', aceitaTroca: true },
+        { id: 2, titulo: 'Honda Civic EXL 2022', preco: 128900, categoria: 'Veículos', local: 'Campinas, SP', distancia: 8.5, foto: '🚗', cor: '#F59E0B', vendedor: 'Ana Beatriz Costa', nota: 4.9, vendas: 12, descricao: 'Civic EXL 2022/2023 flex, automático CVT. IPVA pago, revisões na concessionária. Único dono, sem sinistro.', condicao: 'Usado', aceitaTroca: false },
+        { id: 3, titulo: 'Apartamento 2 quartos - Vila Madalena', preco: 2800, categoria: 'Imóveis', local: 'São Paulo, SP', distancia: 1.8, foto: '🏢', cor: '#10B981', vendedor: 'Paulo Henrique Lima', nota: 4.7, vendas: 3, descricao: 'Apartamento amplo com 2 quartos, sala, cozinha planejada e vaga de garagem. Condomínio com piscina e academia.', condicao: 'Aluguel', aceitaTroca: false },
+        { id: 4, titulo: 'Design de Logo Profissional', preco: 350, categoria: 'Serviços', local: 'Remoto', distancia: 0, foto: '🎨', cor: '#EC4899', vendedor: 'Marina Oliveira', nota: 5.0, vendas: 89, descricao: 'Criação de logotipo profissional com até 3 propostas, 2 revisões incluídas e arquivos finais em PNG, SVG e PDF.', condicao: 'Serviço', aceitaTroca: false },
+        { id: 5, titulo: 'Sofá Retrátil 3 lugares - Linho', preco: 2200, categoria: 'Móveis', local: 'Osasco, SP', distancia: 14.2, foto: '🛋️', cor: '#F97316', vendedor: 'Fernanda Almeida', nota: 4.6, vendas: 21, descricao: 'Sofá retrátil e reclinável 3 lugares em linho bege. Seminovo, apenas 1 ano de uso. Medidas: 2,20m largura.', condicao: 'Usado', aceitaTroca: true },
+        { id: 6, titulo: 'MacBook Air M2 512GB', preco: 8199, categoria: 'Eletrônicos', local: 'São Paulo, SP', distancia: 5.1, foto: '💻', cor: '#6366F1', vendedor: 'João Pedro Silva', nota: 4.9, vendas: 34, descricao: 'MacBook Air M2 midnight, 512GB SSD, 8GB RAM. Garantia Apple até março de 2025. Perfeito estado.', condicao: 'Usado', aceitaTroca: false },
+        { id: 7, titulo: 'Bicicleta Caloi Vulcan Aro 29', preco: 1800, categoria: 'Esportes', local: 'Santo André, SP', distancia: 11.3, foto: '🚲', cor: '#14B8A6', vendedor: 'Lucas Ferreira', nota: 4.5, vendas: 8, descricao: 'Bicicleta aro 29 com suspensão dianteira, 21 marchas e freios a disco. Usada poucas vezes, excelente estado.', condicao: 'Usado', aceitaTroca: true },
+        { id: 8, titulo: 'Vestido de Festa Longo - Tamanho M', preco: 280, categoria: 'Moda', local: 'São Paulo, SP', distancia: 2.7, foto: '👗', cor: '#D946EF', vendedor: 'Camila Rocha', nota: 4.8, vendas: 56, descricao: 'Vestido longo azul marinho, tamanho M, usado apenas uma vez. Tecido acetinado, forrado. Perfeito para formaturas e eventos.', condicao: 'Usado', aceitaTroca: false }
+      ];
+
+      let categoriaAtiva = null;
+      let distanciaMax = 999;
+      let termoBusca = '';
+      let precoMin = null;
+      let precoMax = null;
+
+      window.home_vitrine_filtrarCategoria = function(cat) {
+        if (categoriaAtiva === cat) { categoriaAtiva = null; }
+        else { categoriaAtiva = cat; }
+        home_vitrine_renderizar();
+      };
+
+      window.home_vitrine_abrirBusca = function() {
+        document.getElementById('home-vitrine-modal-busca').classList.remove('hidden');
+        setTimeout(function() { document.getElementById('home-vitrine-input-busca').focus(); }, 100);
+      };
+
+      window.home_vitrine_fecharBusca = function() {
+        document.getElementById('home-vitrine-modal-busca').classList.add('hidden');
+      };
+
+      window.home_vitrine_setDistancia = function(btn, val) {
+        distanciaMax = val;
+        document.querySelectorAll('.home-vitrine-dist-btn').forEach(function(b) {
+          b.style.background = 'white';
+          b.style.borderColor = '#E5E7EB';
+          b.style.color = '#4B5563';
+        });
+        btn.style.background = 'var(--marca-600)';
+        btn.style.borderColor = 'var(--marca-600)';
+        btn.style.color = 'white';
+      };
+
+      window.home_vitrine_filtrarLista = function() {
+        termoBusca = document.getElementById('home-vitrine-input-busca').value.toLowerCase();
+        precoMin = parseFloat(document.getElementById('home-vitrine-preco-min').value) || null;
+        precoMax = parseFloat(document.getElementById('home-vitrine-preco-max').value) || null;
+        home_vitrine_renderizar();
+      };
+
+      window.home_vitrine_aplicarFiltros = function() {
+        home_vitrine_filtrarLista();
+        home_vitrine_fecharBusca();
+        toast('Filtros aplicados!', 'ok');
+      };
+
+      window.home_vitrine_clicouBanner = function() {
+        toast('Frete grátis ativado! 🚚', 'ok');
+      };
+
+      window.home_vitrine_verTodos = function() {
+        categoriaAtiva = null;
+        termoBusca = '';
+        precoMin = null;
+        precoMax = null;
+        distanciaMax = 999;
+        home_vitrine_renderizar();
+        toast('Mostrando todos os anúncios', 'info');
+      };
+
+      function getAnunciosFiltrados() {
+        return anuncios.filter(function(a) {
+          if (categoriaAtiva && a.categoria !== categoriaAtiva) return false;
+          if (termoBusca && !a.titulo.toLowerCase().includes(termoBusca) && !a.categoria.toLowerCase().includes(termoBusca)) return false;
+          if (precoMin !== null && a.preco < precoMin) return false;
+          if (precoMax !== null && a.preco > precoMax) return false;
+          if (distanciaMax < 999 && a.distancia > distanciaMax) return false;
+          return true;
+        });
+      }
+
+      function renderStars(nota) {
+        var html = '';
+        for (var i = 1; i <= 5; i++) {
+          if (i <= Math.round(nota)) {
+            html += '<svg class="w-3 h-3 text-amber-400 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
+          } else {
+            html += '<svg class="w-3 h-3 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
+          }
+        }
+        return html;
+      }
+
+      window.home_vitrine_renderizar = function() {
+        var filtrados = getAnunciosFiltrados();
+        var container = document.getElementById('home-vitrine-lista');
+        var vazio = document.getElementById('home-vitrine-vazio');
+
+        if (filtrados.length === 0) {
+          container.innerHTML = '';
+          container.classList.add('hidden');
+          vazio.classList.remove('hidden');
+          return;
+        }
+        container.classList.remove('hidden');
+        vazio.classList.add('hidden');
+
+        var html = '';
+        filtrados.forEach(function(a) {
+          var precoFormatado = a.preco >= 1000 ? 'R$ ' + a.preco.toLocaleString('pt-BR') : 'R$ ' + a.preco.toFixed(2).replace('.', ',');
+          html += '<div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 active:scale-[0.97] transition-all cursor-pointer" onclick="home_vitrine_abrirDetalhe(' + a.id + ')">';
+          html += '<div class="h-36 flex items-center justify-center relative" style="background:linear-gradient(135deg, ' + a.cor + '15, ' + a.cor + '30)">';
+          html += '<span class="text-5xl">' + a.foto + '</span>';
+          if (a.aceitaTroca) { html += '<span class="absolute top-2 left-2 px-2 py-0.5 bg-amber-100 text-amber-700 text-[10px] font-semibold rounded-full">Aceita troca</span>'; }
+          html += '<span class="absolute top-2 right-2 px-2 py-0.5 bg-white/90 text-gray-600 text-[10px] font-semibold rounded-full">' + a.distancia + ' km</span>';
+          html += '</div>';
+          html += '<div class="p-3">';
+          html += '<p class="text-[10px] font-semibold uppercase tracking-wide mb-1" style="color:var(--marca-600)">' + a.categoria + '</p>';
+          html += '<h3 class="text-sm font-display font-semibold text-gray-900 leading-tight mb-1.5 line-clamp-2" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">' + a.titulo + '</h3>';
+          html += '<p class="font-display font-bold text-base mb-1.5" style="color:var(--marca-700)">' + precoFormatado + '</p>';
+          html += '<div class="flex items-center gap-1 text-gray-400">';
+          html += '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243A8 8 0 1117.657 16.657z"/><circle cx="12" cy="11" r="1.5" fill="currentColor"/></svg>';
+          html += '<span class="text-xs">' + a.local + '</span>';
+          html += '</div></div></div>';
+        });
+        container.innerHTML = html;
+      };
+
+      window.home_vitrine_abrirDetalhe = function(id) {
+        var a = anuncios.find(function(x) { return x.id === id; });
+        if (!a) return;
+        var precoFormatado = a.preco >= 1000 ? 'R$ ' + a.preco.toLocaleString('pt-BR') : 'R$ ' + a.preco.toFixed(2).replace('.', ',');
+        var iniciais = a.vendedor.split(' ').map(function(n) { return n[0]; }).join('');
+        var html = '';
+        html += '<div class="h-48 flex items-center justify-center relative" style="background:linear-gradient(135deg, ' + a.cor + '20, ' + a.cor + '40)">';
+        html += '<span class="text-7xl">' + a.foto + '</span>';
+        if (a.aceitaTroca) { html += '<span class="absolute top-4 left-4 px-3 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">Aceita troca</span>'; }
+        html += '<button onclick="fecharModal()" class="absolute top-4 right-4 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center"><svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>';
+        html += '</div>';
+        html += '<div class="p-5">';
+        html += '<div class="flex items-start justify-between mb-2">';
+        html += '<span class="px-2.5 py-1 rounded-full text-xs font-semibold" style="background:' + a.cor + '15;color:' + a.cor + '">' + a.categoria + '</span>';
+        html += '<span class="text-xs text-gray-400">' + a.distancia + ' km de você</span>';
+        html += '</div>';
+        html += '<h2 class="font-display font-bold text-xl text-gray-900 mb-2">' + a.titulo + '</h2>';
+        html += '<p class="font-display font-bold text-2xl mb-4" style="color:var(--marca-700)">' + precoFormatado + '</p>';
+        html += '<p class="text-sm text-gray-600 font-body leading-relaxed mb-4">' + a.descricao + '</p>';
+        html += '<div class="flex gap-2 mb-4">';
+        html += '<span class="px-3 py-1.5 bg-gray-100 rounded-full text-xs text-gray-600">' + a.condicao + '</span>';
+        if (a.aceitaTroca) { html += '<span class="px-3 py-1.5 bg-amber-50 rounded-full text-xs text-amber-700">Aceita troca</span>'; }
+        html += '</div>';
+        html += '<div class="border-t border-gray-100 pt-4 mb-4">';
+        html += '<div class="flex items-center gap-3">';
+        html += '<div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style="background:' + a.cor + '">' + iniciais + '</div>';
+        html += '<div class="flex-1">';
+        html += '<p class="text-sm font-semibold text-gray-900">' + a.vendedor + '</p>';
+        html += '<div class="flex items-center gap-1">' + renderStars(a.nota) + '<span class="text-xs text-gray-500 ml-1">' + a.nota + ' (' + a.vendas + ' vendas)</span></div>';
+        html += '</div></div></div>';
+        html += '<div class="flex gap-2">';
+        html += '<button onclick="fecharModal();mostrarTela(\'chat-da-negociacao\')" class="flex-1 py-3 rounded-xl font-semibold text-sm text-center active:scale-[0.98] transition-all" style="background:var(--marca-600);color:white">Conversar</button>';
+        html += '<button onclick="home_vitrine_adicionarCarrinho(' + a.id + ')" class="flex-1 py-3 rounded-xl font-semibold text-sm text-center border-2 active:scale-[0.98] transition-all" style="border-color:var(--marca-600);color:var(--marca-600)">Comprar</button>';
+        html += '</div>';
+        html += '<button onclick="fecharModal();mostrarTela(\'chat-da-negociacao\')" class="w-full mt-2 py-3 rounded-xl font-semibold text-sm text-center bg-gray-100 text-gray-700 active:scale-[0.98] transition-all">💬 Negociar preço</button>';
+        html += '</div>';
+        abrirModal(html, 'Detalhe do anúncio');
+      };
+
+      window.home_vitrine_adicionarCarrinho = function(id) {
+        var a = anuncios.find(function(x) { return x.id === id; });
+        if (a) {
+          fecharModal();
+          toast(a.titulo + ' adicionado ao carrinho!', 'ok');
+        }
+      };
+
+      home_vitrine_renderizar();
+    })();
+    </script>
+
+    <!-- TELAS -->
     </main>
 
     <!-- Bottom navigation -->
