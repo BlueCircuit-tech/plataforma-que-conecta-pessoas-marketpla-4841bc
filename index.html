@@ -1453,6 +1453,526 @@
 })();
 </script>
 
+    <section data-tela="meus-anuncios" class="hidden">
+  <div class="meus-anuncios-enter opacity-0 translate-y-4 transition-all duration-500">
+    <!-- Stats -->
+    <div class="px-4 pt-4 pb-2">
+      <div class="grid grid-cols-4 gap-2" id="ma-stats">
+        <div class="bg-white rounded-xl p-3 text-center shadow-sm border border-gray-100">
+          <div class="text-lg font-bold font-display text-gray-800" id="ma-stat-total">12</div>
+          <div class="text-[10px] text-gray-500 mt-0.5">Total</div>
+        </div>
+        <div class="bg-white rounded-xl p-3 text-center shadow-sm border border-gray-100">
+          <div class="text-lg font-bold font-display text-green-600" id="ma-stat-ativos">7</div>
+          <div class="text-[10px] text-gray-500 mt-0.5">Ativos</div>
+        </div>
+        <div class="bg-white rounded-xl p-3 text-center shadow-sm border border-gray-100">
+          <div class="text-lg font-bold font-display text-amber-600" id="ma-stat-vendidos">3</div>
+          <div class="text-[10px] text-gray-500 mt-0.5">Vendidos</div>
+        </div>
+        <div class="bg-white rounded-xl p-3 text-center shadow-sm border border-gray-100">
+          <div class="text-lg font-bold font-display text-marca-700" id="ma-stat-visualizacoes">1.4k</div>
+          <div class="text-[10px] text-gray-500 mt-0.5">Views</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filtros + busca -->
+    <div class="px-4 pt-2 pb-1 space-y-2.5">
+      <div class="flex gap-1.5 overflow-x-auto pb-1 scrollbar-hide" id="ma-filtros">
+        <button onclick="meus_anuncios_filtrar('todos')" data-filtro="todos" class="ma-filtro-btn flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 bg-marca-600 text-white">Todos</button>
+        <button onclick="meus_anuncios_filtrar('ativo')" data-filtro="ativo" class="ma-filtro-btn flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200">Ativos</button>
+        <button onclick="meus_anuncios_filtrar('pausado')" data-filtro="pausado" class="ma-filtro-btn flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200">Pausados</button>
+        <button onclick="meus_anuncios_filtrar('vendido')" data-filtro="vendido" class="ma-filtro-btn flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200">Vendidos</button>
+        <button onclick="meus_anuncios_filtrar('arquivado')" data-filtro="arquivado" class="ma-filtro-btn flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200">Arquivados</button>
+      </div>
+      <div class="relative">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" id="ma-busca" placeholder="Buscar nos seus anúncios..." oninput="meus_anuncios_buscar(this.value)" class="w-full pl-9 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-marca-500 focus:border-transparent transition-all">
+      </div>
+    </div>
+
+    <!-- Lista -->
+    <div class="px-4 pt-2 pb-24">
+      <div id="ma-lista" class="space-y-3"></div>
+      <div id="ma-vazio" class="hidden text-center py-12">
+        <svg class="w-16 h-16 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        <p class="text-gray-500 text-sm font-medium">Nenhum anúncio encontrado</p>
+        <p class="text-gray-400 text-xs mt-1">Tente outro filtro ou crie um novo anúncio</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Criar Anúncio (Wizard) -->
+  <div id="modal-criar" class="hidden fixed inset-0 z-50">
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="meus_anuncios_fecharCriar()"></div>
+    <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl max-h-[85vh] flex flex-col shadow-2xl transform transition-transform duration-300 translate-y-0" id="modal-criar-conteudo">
+      <div class="flex items-center justify-between p-4 border-b border-gray-100 flex-shrink-0">
+        <h3 class="font-display font-bold text-lg text-gray-800">Novo Anúncio</h3>
+        <button onclick="meios_anuncios_fecharCriar()" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
+          <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <!-- Steps -->
+      <div class="flex items-center justify-center gap-2 px-4 pt-4 flex-shrink-0">
+        <div class="flex items-center gap-1"><div id="ma-step-ind-1" class="w-7 h-7 rounded-full bg-marca-600 text-white text-xs font-bold flex items-center justify-center">1</div><span class="text-[10px] text-marca-600 font-semibold">Fotos</span></div>
+        <div class="w-6 h-0.5 bg-gray-200"><div id="ma-step-line-1" class="h-full bg-marca-600 w-0 transition-all duration-300"></div></div>
+        <div class="flex items-center gap-1"><div id="ma-step-ind-2" class="w-7 h-7 rounded-full bg-gray-200 text-gray-400 text-xs font-bold flex items-center justify-center transition-all">2</div><span id="ma-step-lbl-2" class="text-[10px] text-gray-400 font-semibold transition-all">Dados</span></div>
+        <div class="w-6 h-0.5 bg-gray-200"><div id="ma-step-line-2" class="h-full bg-marca-600 w-0 transition-all duration-300"></div></div>
+        <div class="flex items-center gap-1"><div id="ma-step-ind-3" class="w-7 h-7 rounded-full bg-gray-200 text-gray-400 text-xs font-bold flex items-center justify-center transition-all">3</div><span id="ma-step-lbl-3" class="text-[10px] text-gray-400 font-semibold transition-all">Preço</span></div>
+      </div>
+      <div class="flex-1 overflow-y-auto px-4 py-4">
+        <!-- Step 1: Fotos -->
+        <div id="ma-criar-step-1">
+          <p class="text-sm text-gray-600 mb-3">Adicione até 6 fotos do seu produto</p>
+          <div class="flex gap-2 overflow-x-auto pb-2" id="ma-foto-preview">
+            <div onclick="meus_anuncios_addFoto()" class="w-24 h-24 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center cursor-pointer hover:border-marca-400 hover:bg-marca-50 transition-all flex-shrink-0">
+              <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span class="text-[10px] text-gray-400 mt-1">Adicionar</span>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Categoria</label>
+            <select id="ma-criar-cat" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-marca-500">
+              <option value="">Selecione uma categoria</option>
+              <option>Eletrônicos</option><option>Móveis</option><option>Roupas e Acessórios</option><option>Casa e Decoração</option><option>Esportes</option><option>Veículos</option><option>Imóveis</option><option>Serviços</option><option>Outros</option>
+            </select>
+          </div>
+          <div class="mt-3">
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Título do anúncio</label>
+            <input type="text" id="ma-criar-titulo" placeholder="Ex: iPhone 14 Pro 256GB" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-marca-500">
+          </div>
+        </div>
+        <!-- Step 2: Dados -->
+        <div id="ma-criar-step-2" class="hidden">
+          <div class="mt-1">
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Descrição</label>
+            <textarea id="ma-criar-desc" rows="4" placeholder="Descreva seu produto: estado, características, motivo da venda..." class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-marca-500 resize-none"></textarea>
+          </div>
+          <div class="grid grid-cols-2 gap-3 mt-3">
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Condição</label>
+              <select id="ma-criar-cond" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-marca-500">
+                <option>Novo</option><option>Usado</option><option>Recondicionado</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Quantidade</label>
+              <input type="number" id="ma-criar-qtd" value="1" min="1" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-marca-500">
+            </div>
+          </div>
+          <div class="mt-3">
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Localização</label>
+            <div class="relative">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243A8 8 0 1117.657 16.657z"/></svg>
+              <input type="text" id="ma-criar-local" value="São Paulo, SP" placeholder="Cidade - UF" class="w-full pl-9 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-marca-500">
+            </div>
+          </div>
+          <div class="mt-3">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" id="ma-criar-retirada" checked class="w-4 h-4 rounded border-gray-300 text-marca-600 focus:ring-marca-500">
+              <span class="text-sm text-gray-700">Aceito retirada no local</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer mt-2">
+              <input type="checkbox" id="ma-criar-envio" checked class="w-4 h-4 rounded border-gray-300 text-marca-600 focus:ring-marca-500">
+              <span class="text-sm text-gray-700">Disponível para envio</span>
+            </label>
+          </div>
+        </div>
+        <!-- Step 3: Preço -->
+        <div id="ma-criar-step-3" class="hidden">
+          <div class="mt-1">
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Preço (R$)</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm font-semibold">R$</span>
+              <input type="text" id="ma-criar-preco" placeholder="0,00" oninput="meus_anuncios_mascaraMoeda(this)" class="w-full pl-12 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-marca-500">
+            </div>
+          </div>
+          <div class="mt-3">
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Ou ofereça por</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm font-semibold">R$</span>
+              <input type="text" id="ma-criar-menor" placeholder="Melhor oferta" oninput="meus_anuncios_mascaraMoeda(this)" class="w-full pl-12 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-marca-500">
+            </div>
+            <p class="text-[10px] text-gray-400 mt-1">Deixe vazio para desativar</p>
+          </div>
+          <div class="mt-4 p-3 bg-marca-50 rounded-xl">
+            <p class="text-xs text-marca-800 font-medium">💡 Dica: anúncios com preço claro recebem até 3x mais visualizações</p>
+          </div>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div class="p-4 border-t border-gray-100 flex gap-2.5 flex-shrink-0">
+        <button id="ma-criar-voltar" onclick="meus_anuncios_prevStep()" class="hidden flex-1 py-3 rounded-xl border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-all active:scale-95">Voltar</button>
+        <button id="ma-criar-proximo" onclick="meus_anuncios_nextStep()" class="flex-1 py-3 rounded-xl bg-marca-600 text-white text-sm font-semibold hover:bg-marca-700 transition-all active:scale-95 shadow-lg shadow-marca-200">Continuar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Detalhes do Anúncio -->
+  <div id="modal-detalhe-anuncio" class="hidden fixed inset-0 z-50">
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="fecharModal()"></div>
+    <div class="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl max-h-[90vh] flex flex-col shadow-2xl">
+      <div class="flex items-center justify-between p-4 border-b border-gray-100 flex-shrink-0">
+        <h3 class="font-display font-bold text-lg text-gray-800">Detalhes do Anúncio</h3>
+        <button onclick="fecharModal()" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
+          <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="flex-1 overflow-y-auto p-4" id="modal-detalhe-conteudo"></div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var ANUNCIOS = [
+        { id: 1, titulo: 'Sofá Retrátil 3 Lugares Cinza', preco: 2400, menor: 2000, status: 'ativo', categoria: 'Móveis', visualizacoes: 342, favoritos: 18, data: '2025-01-10', img: '#5B6B5E', condicao: 'Usado', descricao: 'Sofá retrátil e reclinável, tecido cinza antialérgico.Ótimo estado, sem manchas ou defeitos. Apenas um pequeno desgaste no braço direito.', local: 'São Paulo, SP', retirada: true, envio: true },
+        { id: 2, titulo: 'Notebook Dell Inspiron i5 16GB', preco: 3200, menor: null, status: 'ativo', categoria: 'Eletrônicos', visualizacoes: 891, favoritos: 45, data: '2025-01-05', img: '#4A7C6F', condicao: 'Usado', descricao: 'Dell Inspiron 15 3501, Intel Core i5 11ª geração, 16GB RAM, SSD 512GB. Tela 15.6" Full HD. Perfeito para trabalho e estudos.', local: 'Campinas, SP', retirada: true, envio: true },
+        { id: 3, titulo: 'Bicicleta Caloi Vulcan Aro 29', preco: 1800, menor: 1500, status: 'ativo', categoria: 'Esportes', visualizacoes: 215, favoritos: 12, data: '2024-12-20', img: '#7D6B5D', condicao: 'Usado', descricao: 'Bicicleta Caloi Vulcan aro 29, freio a disco, 21 marchas. Usada em trilhas leves. Pneus novos trocados há 2 meses.', local: 'Rio de Janeiro, RJ', retirada: true, envio: false },
+        { id: 4, titulo: 'Cadeira Gamer ThunderX3 EC3', preco: 980, menor: 850, status: 'pausado', categoria: 'Móveis', visualizacoes: 567, favoritos: 31, data: '2024-12-15', img: '#6B7B8E', condicao: 'Usado', descricao: 'Cadeira gamer com suporte lombar ajustável, apoio de cabeça, encosto reclinável até 180°. Cor preta e vermelha.', local: 'Belo Horizonte, MG', retirada: false, envio: true },
+        { id: 5, titulo: 'AirPods Pro 2ª Geração', preco: 1400, menor: null, status: 'vendido', categoria: 'Eletrônicos', visualizacoes: 1203, favoritos: 78, data: '2024-12-01', img: '#8E7B6B', condicao: 'Usado', descricao: 'Apple AirPods Pro 2ª geração com estojo de carregamento MagSafe. Cancelamento de ruído ativo. Usados por 3 meses.', local: 'São Paulo, SP', retirada: true, envio: true },
+        { id: 6, titulo: 'Mesa de Escritório Madeira Maciça', preco: 1500, menor: 1200, status: 'ativo', categoria: 'Móveis', visualizacoes: 178, favoritos: 9, data: '2025-01-12', img: '#5E6B7D', condicao: 'Usado', descricao: 'Mesa de escritório em madeira maciça, 1,60m x 0,80m. Acabamento encerado. Inclui 2 gavetas laterais.', local: 'Curitiba, PR', retirada: true, envio: false },
+        { id: 7, titulo: 'PlayStation 5 Digital Edition', preco: 3500, menor: null, status: 'ativo', categoria: 'Eletrônicos', visualizacoes: 2105, favoritos: 156, data: '2024-11-28', img: '#7B6B5D', condicao: 'Usado', descricao: 'PS5 Digital Edition, 825GB SSD. Comprado em 2024, garantia AppleCare até 2026. Inclui 2 controles e 5 jogos.', local: 'Porto Alegre, RS', retirada: true, envio: true },
+        { id: 8, titulo: 'Vestido Festa Longo Vermelho', preco: 320, menor: null, status: 'vendido', categoria: 'Roupas e Acessórios', visualizacoes: 445, favoritos: 22, data: '2024-12-10', img: '#8B4B5A', condicao: 'Usado', descricao: 'Vestido longo de festa, cor vermelha, tamanho M. Usado uma única vez. Tecido acetinado com detalhes em brilho.', local: 'Salvador, BA', retirada: true, envio: false },
+        { id: 9, titulo: 'Smart TV Samsung 55" 4K', preco: 2100, menor: 1900, status: 'pausado', categoria: 'Eletrônicos', visualizacoes: 876, favoritos: 42, data: '2024-12-05', img: '#4B6B8B', condicao: 'Usado', descricao: 'Samsung Crystal UHD 55", 4K, Smart TV com Tizen. 3 entradas HDMI, 2 USB. SmartCast e Alexa integrados.', local: 'Florianópolis, SC', retirada: true, envio: true },
+        { id: 10, titulo: 'Guitarra Stratocaster Sunburst', preco: 2800, menor: null, status: 'ativo', categoria: 'Esportes', visualizacoes: 132, favoritos: 7, data: '2025-01-08', img: '#6B5E4B', condicao: 'Usado', descricao: 'Guitarra estilo Stratocaster, acabamento sunburst, corpo em basswood, braço em maple. Inclui capa e cabo.', local: 'Recife, PE', retirada: true, envio: true },
+        { id: 11, titulo: 'Micro-ondas Electrolux 30L', preco: 450, menor: null, status: 'arquivado', categoria: 'Eletrônicos', visualizacoes: 89, favoritos: 3, data: '2024-10-15', img: '#5D5D5D', condicao: 'Usado', descricao: 'Electrolux 30L, painel digital, função descongelar. Perfeito funcionamento.', local: 'São Paulo, SP', retirada: true, envio: false },
+        { id: 12, titulo: 'Furadeira de Impacto Bosch', preco: 380, menor: null, status: 'ativo', categoria: 'Serviços', visualizacoes: 256, favoritos: 14, data: '2025-01-02', img: '#3E5E6B', condicao: 'Usado', descricao: 'Bosch 13mm, 750W, velocidade variável. Com maleta e acessórios completos.', local: 'Brasília, DF', retirada: true, envio: false }
+      ];
+      window._ma_dados = ANUNCIOS;
+      window._ma_filtro = 'todos';
+      window._ma_busca = '';
+      window._ma_criarStep = 1;
+      window._ma_fotosCount = 0;
+      window._ma_anuncioId = null;
+
+      var STATUS_CFG = {
+        ativo:    { label: 'Ativo',    cls: 'bg-green-100 text-green-700', dot: 'bg-green-500', icon: '●' },
+        pausado:  { label: 'Pausado',  cls: 'bg-amber-100 text-amber-700', dot: 'bg-amber-500', icon: '●' },
+        vendido:  { label: 'Vendido',  cls: 'bg-blue-100 text-blue-700', dot: 'bg-blue-500', icon: '●' },
+        arquivado:{ label: 'Arquivado',cls: 'bg-gray-100 text-gray-500', dot: 'bg-gray-400', icon: '●' }
+      };
+
+      var EMOJI_FOTO = ['📷','📸','🖼️','📷','📸','🖼️'];
+      var FOTO_GRAD = [
+        ['#5B6B5E','#8BA89B'],['#4A7C6F','#2D5A4E'],['#7D6B5D','#B5A090'],['#6B7B8E','#4A5D70'],
+        ['#8E7B6B','#B5A595'],['#5E6B7D','#3E5068'],['#7B6B5D','#A59078'],['#8B4B5A','#B57080'],
+        ['#4B6B8B','#2E4D6E'],['#6B5E4B','#9A8B74'],['#5D5D5D','#888888'],['#3E5E6B','#264D5C']
+      ];
+
+      function meus_anuncios_renderizar() {
+        var filtro = window._ma_filtro;
+        var busca = window._ma_busca.toLowerCase().trim();
+        var lista = document.getElementById('ma-lista');
+        var vazio = document.getElementById('ma-vazio');
+        var itens = ANUNCIOS.filter(function(a) {
+          var matchF = filtro === 'todos' || a.status === filtro;
+          var matchB = !busca || a.titulo.toLowerCase().indexOf(busca) !== -1 || a.categoria.toLowerCase().indexOf(busca) !== -1;
+          return matchF && matchB;
+        });
+        if (itens.length === 0) { lista.innerHTML = ''; vazio.classList.remove('hidden'); return; }
+        vazio.classList.add('hidden');
+        var html = '';
+        itens.forEach(function(a, i) {
+          var cfg = STATUS_CFG[a.status] || STATUS_CFG.ativo;
+          var g = FOTO_GRAD[a.id - 1] || FOTO_GRAD[0];
+          html += '<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200">';
+          html += '<div class="flex items-center gap-3 p-3 cursor-pointer" onclick="meus_anuncios_abrirDetalhe(' + a.id + ')">';
+          html += '<div class="w-16 h-16 rounded-xl flex-shrink-0 flex items-center justify-center text-2xl" style="background:linear-gradient(135deg,' + g[0] + ',' + g[1] + ')">' + EMOJI_FOTO[(a.id-1)%6] + '</div>';
+          html += '<div class="flex-1 min-w-0">';
+          html += '<h4 class="text-sm font-semibold text-gray-800 truncate">' + a.titulo + '</h4>';
+          html += '<p class="text-marca-600 font-bold text-sm mt-0.5">' + brl(a.preco) + (a.menor ? ' <span class="text-[10px] text-gray-400 font-normal">ou ' + brl(a.menor) + '</span>' : '') + '</p>';
+          html += '<div class="flex items-center gap-3 mt-1">';
+          html += '<span class="text-[11px] text-gray-400 flex items-center gap-0.5"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>' + a.visualizacoes + '</span>';
+          html += '<span class="text-[11px] text-gray-400">' + dataBR(a.data) + '</span>';
+          html += '</div></div>';
+          html += '<div class="relative">';
+          html += '<button onclick="event.stopPropagation();meus_anuncios_toggleMenu(' + a.id + ')" class="p-2 rounded-full hover:bg-gray-100 transition-colors"><svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>';
+          html += '<div id="ma-menu-' + a.id + '" class="hidden absolute right-0 top-full mt-1 w-40 bg-white rounded-xl shadow-xl border border-gray-100 z-20 overflow-hidden">';
+          if (a.status === 'ativo') {
+            html += '<button onclick="meus_anuncios_pausar(' + a.id + ')" class="w-full text-left px-3 py-2.5 text-xs text-gray-700 hover:bg-gray-50 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>Pausar anúncio</button>';
+          } else if (a.status === 'pausado') {
+            html += '<button onclick="meus_anuncios_reativar(' + a.id + ')" class="w-full text-left px-3 py-2.5 text-xs text-gray-700 hover:bg-gray-50 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Reativar</button>';
+          }
+          if (a.status === 'ativo' || a.status === 'pausado') {
+            html += '<button onclick="meus_anuncios_renovar(' + a.id + ')" class="w-full text-left px-3 py-2.5 text-xs text-gray-700 hover:bg-gray-50 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-marca-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>Renovar</button>';
+            html += '<button onclick="meus_anuncios_arquivar(' + a.id + ')" class="w-full text-left px-3 py-2.5 text-xs text-gray-700 hover:bg-gray-50 transition-colors flex items-center gap-2"><svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v1a2 2 0 01-2 2M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>Arquivar</button>';
+          }
+          html += '</div></div></div>';
+          html += '<div class="px-3 pb-2.5 flex items-center justify-between">';
+          html += '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold ' + cfg.cls + '"><span class="w-1.5 h-1.5 rounded-full ' + cfg.dot + '"></span>' + cfg.label + '</span>';
+          if (a.status === 'ativo') html += '<button onclick="event.stopPropagation();mostrarTela(\'chat-da-negociacao\')" class="text-[11px] text-marca-600 font-semibold hover:underline flex items-center gap-0.5"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-4.272C3.512 14.245 3 12.991 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>Chats</button>';
+          html += '</div></div>';
+        });
+        lista.innerHTML = html;
+        meus_anuncios_atualizarStats();
+      }
+
+      function meus_anuncios_atualizarStats() {
+        var ativos = ANUNCIOS.filter(function(a){return a.status==='ativo';}).length;
+        var vendidos = ANUNCIOS.filter(function(a){return a.status==='vendido';}).length;
+        var totalViews = ANUNCIOS.reduce(function(s,a){return s+a.visualizacoes;},0);
+        var v = totalViews >= 1000 ? (totalViews/1000).toFixed(1)+'k' : totalViews;
+        document.getElementById('ma-stat-total').textContent = ANUNCIOS.length;
+        document.getElementById('ma-stat-ativos').textContent = ativos;
+        document.getElementById('ma-stat-vendidos').textContent = vendidos;
+        document.getElementById('ma-stat-visualizacoes').textContent = v;
+      }
+
+      function meus_anuncios_filtrar(f) {
+        window._ma_filtro = f;
+        var btns = document.querySelectorAll('.ma-filtro-btn');
+        btns.forEach(function(b) {
+          if (b.dataset.filtro === f) {
+            b.className = b.className.replace(/bg-gray-\d+ text-gray-\d+ hover:bg-gray-\d+/g, '');
+            b.classList.add('bg-marca-600','text-white');
+          } else {
+            b.classList.remove('bg-marca-600','text-white');
+            b.classList.add('bg-gray-100','text-gray-600','hover:bg-gray-200');
+          }
+        });
+        meus_anuncios_renderizar();
+      }
+
+      function meus_anuncios_buscar(v) {
+        window._ma_busca = v;
+        meus_anuncios_renderizar();
+      }
+
+      function meus_anuncios_toggleMenu(id) {
+        var m = document.getElementById('ma-menu-' + id);
+        if (!m) return;
+        document.querySelectorAll('[id^="ma-menu-"]').forEach(function(el) { if (el !== m) el.classList.add('hidden'); });
+        m.classList.toggle('hidden');
+      }
+
+      function meus_anuncios_pausar(id) {
+        var a = ANUNCIOS.find(function(x){return x.id===id;});
+        if (a) { a.status = 'pausado'; }
+        fecharMenus();
+        meus_anuncios_renderizar();
+        toast('Anúncio pausado com sucesso', 'info');
+      }
+
+      function meus_anuncios_reativar(id) {
+        var a = ANUNCIOS.find(function(x){return x.id===id;});
+        if (a) { a.status = 'ativo'; }
+        fecharMenus();
+        meus_anuncios_renderizar();
+        toast('Anúncio reativado! Agora está visível.', 'ok');
+      }
+
+      function meus_anuncios_renovar(id) {
+        var a = ANUNCIOS.find(function(x){return x.id===id;});
+        if (a) { a.data = new Date().toISOString().split('T')[0]; a.visualizacoes = 0; }
+        fecharMenus();
+        meus_anuncios_renderizar();
+        toast('Anúncio renovado! Posição renovada nos resultados.', 'ok');
+      }
+
+      function meus_anuncios_arquivar(id) {
+        var a = ANUNCIOS.find(function(x){return x.id===id;});
+        if (a) { a.status = 'arquivado'; }
+        fecharMenus();
+        meus_anuncios_renderizar();
+        toast('Anúncio arquivado', 'info');
+      }
+
+      function fecharMenus() {
+        document.querySelectorAll('[id^="ma-menu-"]').forEach(function(el){el.classList.add('hidden');});
+      }
+
+      // Criar anúncio (wizard)
+      window.meus_anuncios_abrirCriar = function() {
+        window._ma_criarStep = 1;
+        window._ma_fotosCount = 0;
+        ['ma-criar-titulo','ma-criar-desc','ma-criar-preco','ma-criar-menor'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+        document.getElementById('ma-criar-cat').selectedIndex = 0;
+        document.getElementById('ma-foto-preview').innerHTML = '<div onclick="meus_anuncios_addFoto()" class="w-24 h-24 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center cursor-pointer hover:border-marca-400 hover:bg-marca-50 transition-all flex-shrink-0"><svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg><span class="text-[10px] text-gray-400 mt-1">Adicionar</span></div>';
+        meus_anuncios_atualizarCriarStep();
+        document.getElementById('modal-criar').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      };
+
+      window.meus_anuncios_fecharCriar = function() {
+        document.getElementById('modal-criar').classList.add('hidden');
+        document.body.style.overflow = '';
+      };
+
+      window.meus_anuncios_nextStep = function() {
+        var s = window._ma_criarStep;
+        if (s === 1) {
+          var titulo = document.getElementById('ma-criar-titulo').value.trim();
+          var cat = document.getElementById('ma-criar-cat').value;
+          if (!titulo) { toast('Preencha o título do anúncio', 'erro'); return; }
+          if (!cat) { toast('Selecione uma categoria', 'erro'); return; }
+        }
+        if (s === 2) {
+          var desc = document.getElementById('ma-criar-desc').value.trim();
+          if (!desc) { toast('Adicione uma descrição', 'erro'); return; }
+        }
+        if (s === 3) {
+          var preco = document.getElementById('ma-criar-preco').value.replace(/\D/g,'');
+          if (!preco || parseFloat(preco)/100 === 0) { toast('Informe um preço válido', 'erro'); return; }
+          meus_anuncios_finalizar();
+          return;
+        }
+        window._ma_criarStep = s + 1;
+        meus_anuncios_atualizarCriarStep();
+      };
+
+      window.meus_anuncios_prevStep = function() {
+        if (window._ma_criarStep > 1) {
+          window._ma_criarStep--;
+          meus_anuncios_atualizarCriarStep();
+        }
+      };
+
+      function meus_anuncios_atualizarCriarStep() {
+        var s = window._ma_criarStep;
+        [1,2,3].forEach(function(i) {
+          var ind = document.getElementById('ma-step-ind-' + i);
+          var lbl = document.getElementById('ma-step-lbl-' + i);
+          if (i < s) {
+            ind.className = 'w-7 h-7 rounded-full bg-green-500 text-white text-xs font-bold flex items-center justify-center transition-all';
+            ind.innerHTML = '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>';
+            if (lbl) { lbl.className = 'text-[10px] text-green-600 font-semibold transition-all'; }
+          } else if (i === s) {
+            ind.className = 'w-7 h-7 rounded-full bg-marca-600 text-white text-xs font-bold flex items-center justify-center transition-all';
+            ind.textContent = i;
+            if (lbl) { lbl.className = 'text-[10px] text-marca-600 font-semibold transition-all'; }
+          } else {
+            ind.className = 'w-7 h-7 rounded-full bg-gray-200 text-gray-400 text-xs font-bold flex items-center justify-center transition-all';
+            ind.textContent = i;
+            if (lbl) { lbl.className = 'text-[10px] text-gray-400 font-semibold transition-all'; }
+          }
+        });
+        for (var j = 1; j <= 2; j++) {
+          var line = document.getElementById('ma-step-line-' + j);
+          if (line) line.style.width = (j < s) ? '100%' : '0%';
+        }
+        for (var k = 1; k <= 3; k++) {
+          var step = document.getElementById('ma-criar-step-' + k);
+          if (step) step.classList.toggle('hidden', k !== s);
+        }
+        var btnV = document.getElementById('ma-criar-voltar');
+        var btnP = document.getElementById('ma-criar-proximo');
+        btnV.classList.toggle('hidden', s === 1);
+        btnP.textContent = s === 3 ? 'Publicar Anúncio' : 'Continuar';
+        document.getElementById('ma-criar-step-' + s).scrollTop = 0;
+      }
+
+      window.meus_anuncios_addFoto = function() {
+        if (window._ma_fotosCount >= 6) { toast('Máximo de 6 fotos', 'erro'); return; }
+        window._ma_fotosCount++;
+        var container = document.getElementById('ma-foto-preview');
+        var addBtn = container.querySelector('[onclick="meios_anuncios_addFoto()"]');
+        var g = FOTO_GRAD[window._ma_fotosCount - 1] || ['#888','#aaa'];
+        var div = document.createElement('div');
+        div.className = 'w-24 h-24 rounded-xl flex-shrink-0 flex items-center justify-center text-2xl relative group';
+        div.style.background = 'linear-gradient(135deg,' + g[0] + ',' + g[1] + ')';
+        div.innerHTML = EMOJI_FOTO[window._ma_fotosCount-1] + '<button onclick="meus_anuncios_removerFoto(this)" class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">&times;</button>';
+        container.insertBefore(div, addBtn);
+        toast('Foto adicionada (' + window._ma_fotosCount + '/6)', 'ok');
+      };
+
+      window.meios_anuncios_fecharCriar = window.meus_anuncios_fecharCriar;
+      window.meios_anuncios_addFoto = window.meus_anuncios_addFoto;
+
+      window.meus_anuncios_removerFoto = function(btn) {
+        btn.parentElement.remove();
+        window._ma_fotosCount = Math.max(0, window._ma_fotosCount - 1);
+      };
+
+      function meus_anuncios_finalizar() {
+        var titulo = document.getElementById('ma-criar-titulo').value.trim();
+        var cat = document.getElementById('ma-criar-cat').value;
+        var desc = document.getElementById('ma-criar-desc').value.trim();
+        var precoRaw = document.getElementById('ma-criar-preco').value.replace(/\D/g, '');
+        var preco = parseFloat(precoRaw) / 100;
+        var menorRaw = document.getElementById('ma-criar-menor').value.replace(/\D/g, '');
+        var menor = menorRaw ? parseFloat(menorRaw) / 100 : null;
+        var cond = document.getElementById('ma-criar-cond').value;
+        var local = document.getElementById('ma-criar-local').value.trim();
+        var retirada = document.getElementById('ma-criar-retirada').checked;
+        var envio = document.getElementById('ma-criar-envio').checked;
+        var g = FOTO_GRAD[ANUNCIOS.length % FOTO_GRAD.length];
+        var novo = {
+          id: Date.now(), titulo: titulo, preco: preco, menor: menor, status: 'ativo',
+          categoria: cat, visualizacoes: 0, favoritos: 0,
+          data: new Date().toISOString().split('T')[0], img: g[0],
+          condicao: cond, descricao: desc, local: local || 'Não informado',
+          retirada: retirada, envio: envio
+        };
+        ANUNCIOS.unshift(novo);
+        meus_anuncios_fecharCriar();
+        window._ma_filtro = 'todos';
+        meus_anuncios_filtrar('todos');
+        document.getElementById('ma-busca').value = '';
+        window._ma_busca = '';
+        toast('🎉 Anúncio publicado com sucesso!', 'ok');
+      }
+
+      window.meus_anuncios_mascaraMoeda = function(el) {
+        var v = el.value.replace(/\D/g, '');
+        if (!v) { el.value = ''; return; }
+        var num = (parseInt(v, 10) / 100);
+        el.value = num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      };
+
+      // Detalhes
+      window.meus_anuncios_abrirDetalhe = function(id) {
+        var a = ANUNCIOS.find(function(x){return x.id===id;});
+        if (!a) return;
+        window._ma_anuncioId = id;
+        var cfg = STATUS_CFG[a.status] || STATUS_CFG.ativo;
+        var g = FOTO_GRAD[a.id-1] || FOTO_GRAD[0];
+        var h = '';
+        h += '<div class="w-full h-48 rounded-2xl flex items-center justify-center text-5xl mb-4" style="background:linear-gradient(135deg,' + g[0] + ',' + g[1] + ')">' + (EMOJI_FOTO[(a.id-1)%6] || '📷') + '</div>';
+        h += '<div class="flex items-start justify-between mb-2">';
+        h += '<h2 class="text-lg font-display font-bold text-gray-800 flex-1 pr-2">' + a.titulo + '</h2>';
+        h += '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold ' + cfg.cls + ' flex-shrink-0"><span class="w-1.5 h-1.5 rounded-full ' + cfg.dot + '"></span>' + cfg.label + '</span>';
+        h += '</div>';
+        h += '<p class="text-2xl font-bold text-marca-600 mb-1">' + brl(a.preco) + (a.menor ? ' <span class="text-sm text-gray-400 font-normal">ou melhor oferta</span>' : '') + '</p>';
+        h += '<div class="flex items-center gap-4 mb-4 text-xs text-gray-500">';
+        h += '<span class="flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>' + a.visualizacoes + ' views</span>';
+        h += '<span class="flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>' + a.favoritos + ' favoritos</span>';
+        h += '<span>' + dataBR(a.data) + '</span>';
+        h += '</div>';
+        h += '<div class="bg-gray-50 rounded-xl p-3 mb-4 space-y-2">';
+        h += '<div class="flex justify-between text-sm"><span class="text-gray-500">Categoria</span><span class="font-medium text-gray-800">' + a.categoria + '</span></div>';
+        h += '<div class="flex justify-between text-sm"><span class="text-gray-500">Condição</span><span class="font-medium text-gray-800">' + a.condicao + '</span></div>';
+        h += '<div class="flex justify-between text-sm"><span class="text-gray-500">Localização</span><span class="font-medium text-gray-800">' + a.local + '</span></div>';
+        h += '<div class="flex justify-between text-sm"><span class="text-gray-500">Retirada</span><span class="font-medium ' + (a.retirada ? 'text-green-600' : 'text-gray-400') + '">' + (a.retirada ? 'Sim' : 'Não') + '</span></div>';
+        h += '<div class="flex justify-between text-sm"><span class="text-gray-500">Envio</span><span class="font-medium ' + (a.envio ? 'text-green-600' : 'text-gray-400') + '">' + (a.envio ? 'Sim' : 'Não') + '</span></div>';
+        h += '</div>';
+        h += '<div class="mb-4"><h3 class="text-sm font-semibold text-gray-700 mb-1">Descrição</h3><p class="text-sm text-gray-600 leading-relaxed">' + a.descricao + '</p></div>';
+        h += '<div class="mb-4"><h3 class="text-sm font-semibold text-gray-700 mb-2">Histórico</h3>';
+        h += '<div class="space-y-2">';
+        h += '<div class="flex gap-2 text-xs"><span class="text-gray-400 w-16 flex-shrink-0">' + dataBR(a.data) + '</span><span class="text-gray-600">Anúncio criado</span></div>';
+        h += '<div class="flex gap-2 text-xs"><span class="text-gray-400 w-16 flex-shrink-0">' + dataBR(a.data) + '</span><span class="text-green-600">Publicado com sucesso</span></div>';
+        h += '<div class="flex gap-2 text-xs"><span class="text-gray-400 w-16 flex-shrink-0">' + dataBR(a.data) + '</span><span class="text-gray-600">Primeira visualização</span></div>';
+        h += '</div></div>';
+        h += '<div class="flex gap-2 pt-2 pb-4">';
+        h += '<button onclick="fecharModal();mostrarTela(\'detalhe-do-anuncio\')" class="flex-1 py-3 rounded-xl bg-marca-600 text-white text-sm font-semibold hover:bg-marca-700 transition-all active:scale-95">Ver Público</button>';
+        if (a.status === 'ativo') h += '<button onclick="fecharModal();meus_anuncios_pausar(' + a.id + ')" class="px-4 py-3 rounded-xl border border-gray-200 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-all active:scale-95">Pausar</button>';
+        h += '</div>';
+        abrirModal(h, 'Detalhes');
+      };
+
+      // Close menus on outside click
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('[id^="ma-menu-"]') && !e.target.closest('button[onclick*="toggleMenu"]')) {
+          fecharMenus();
+        }
+      });
+
+      // Init
+      meus_anuncios_renderizar();
+    })();
+  </script>
+</section>
+
     <!-- TELAS -->
     </main>
 
