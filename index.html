@@ -3114,6 +3114,103 @@
     perfil_e_conta_abrir_aba('meus-dados');
 </script>
 
+    <section data-tela="painel-administrativo" class="hidden">
+    <div class="px-4 pt-6 pb-24 space-y-5">
+        <div class="flex items-start justify-between">
+            <div>
+                <h1 class="font-display text-xl font-bold text-gray-900">Painel Administrativo</h1>
+                <p class="text-sm text-gray-500 mt-0.5">Visão geral da plataforma</p>
+            </div>
+            <button onclick="painel_administrativo_abrirNotificacoes()" class="relative w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center active:scale-95 transition-all hover:border-marca-300">
+                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                <span class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">3</span>
+            </button>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+            <div class="card p-3.5 space-y-2">
+                <div class="w-9 h-9 rounded-lg bg-marca-50 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-marca-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <p class="text-2xl font-display font-bold text-gray-900" id="card-usuarios">12.847</p>
+                <div class="flex items-center gap-1">
+                    <span class="badge badge-success text-[10px] px-1.5 py-0">+8.2%</span>
+                    <span class="text-[11px] text-gray-400">vs mês anterior</span>
+                </div>
+            </div>
+            <div class="card p-3.5 space-y-2">
+                <div class="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                </div>
+                <p class="text-2xl font-display font-bold text-gray-900" id="card-anuncios">3.462</p>
+                <div class="flex items-center gap-1">
+                    <span class="badge badge-success text-[10px] px-1.5 py-0">+5.1%</span>
+                    <span class="text-[11px] text-gray-400">ativos agora</span>
+                </div>
+            </div>
+            <div class="card p-3.5 space-y-2">
+                <div class="w-9 h-9 rounded-lg bg-amber-50 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                </div>
+                <p class="text-2xl font-display font-bold text-gray-900" id="card-pedidos">1.284</p>
+                <div class="flex items-center gap-1">
+                    <span class="badge badge-danger text-[10px] px-1.5 py-0">-2.4%</span>
+                    <span class="text-[11px] text-gray-400">este mês</span>
+                </div>
+            </div>
+            <div class="card p-3.5 space-y-2">
+                <div class="w-9 h-9 rounded-lg bg-emerald-50 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <p class="text-2xl font-display font-bold text-gray-900" id="card-receita">R$ 428K</p>
+                <div class="flex items-center gap-1">
+                    <span class="badge badge-success text-[10px] px-1.5 py-0">+12.7%</span>
+                    <span class="text-[11px] text-gray-400">vs mês anterior</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-4 space-y-3">
+            <div class="flex items-center justify-between">
+                <h3 class="font-display font-bold text-gray-900 text-sm">Vendas — últimos 7 dias</h3>
+                <select id="chart-periodo" onchange="painel_administrativo_atualizarGrafico()" class="text-xs bg-gray-50 border border-gray-200 rounded-lg px-2 py-1 text-gray-600 outline-none focus:border-marca-400">
+                    <option value="7d">7 dias</option>
+                    <option value="15d">15 dias</option>
+                    <option value="30d">30 dias</option>
+                </select>
+            </div>
+            <svg id="grafico-vendas" viewBox="0 0 300 140" class="w-full h-36" preserveAspectRatio="none"></svg>
+            <div class="flex justify-between text-[10px] text-gray-400 px-1">
+                <span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span>
+            </div>
+        </div>
+
+        <div class="space-y-2.5">
+            <div class="flex items-center justify-between">
+                <h3 class="font-display font-bold text-gray-900 text-sm">Anúncios Recentes</h3>
+                <button onclick="painel_administrativo_mostrarTodosAnuncios()" class="text-xs text-marca-600 font-medium hover:text-marca-700 transition-colors">Ver todos</button>
+            </div>
+            <div class="relative">
+                <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input type="text" id="busca-anuncios" oninput="painel_administrativo_buscarAnuncios()" placeholder="Buscar anúncios, usuários ou categorias..." class="card w-full pl-10 pr-4 py-2.5 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-marca-400 transition-colors">
+            </div>
+            <div class="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1">
+                <button onclick="painel_administrativo_filtrarCategoria('todos')" data-filtro-cat="todos" class="painel-filtro-cat shrink-0 text-xs px-3.5 py-1.5 rounded-full bg-marca-600 text-white font-medium transition-all active:scale-95">Todos</button>
+                <button onclick="painel_administrativo_filtrarCategoria('imoveis')" data-filtro-cat="imoveis" class="painel-filtro-cat shrink-0 text-xs px-3.5 py-1.5 rounded-full bg-gray-100 text-gray-600 font-medium transition-all active:scale-95 hover:bg-gray-200">Imóveis</button>
+                <button onclick="painel_administrativo_filtrarCategoria('veiculos')" data-filtro-cat="veiculos" class="painel-filtro-cat shrink-0 text-xs px-3.5 py-1.5 rounded-full bg-gray-100 text-gray-600 font-medium transition-all active:scale-95 hover:bg-gray-200">Veículos</button>
+                <button onclick="painel_administrativo_filtrarCategoria('eletronicos')" data-filtro-cat="eletronicos" class="painel-filtro-cat shrink-0 text-xs px-3.5 py-1.5 rounded-full bg-gray-100 text-gray-600 font-medium transition-all active:scale-95 hover:bg-gray-200">Eletrônicos</button>
+                <button onclick="painel_administrativo_filtrarCategoria('servicos')" data-filtro-cat="servicos" class="painel-filtro-cat shrink-0 text-xs px-3.5 py-1.5 rounded-full bg-gray-100 text-gray-600 font-medium transition-all active:scale-95 hover:bg-gray-200">Serviços</button>
+            </div>
+            <div id="lista-anuncios" class="space-y-2.5"></div>
+            <div id="lista-anuncios-vazia" class="hidden text-center py-10 space-y-2">
+                <svg class="w-12 h-12 text-gray-300 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <p class="text-sm text-gray-400">Nenhum anúncio encontrado</p>
+                <p class="text-xs text-gray-300">Tente ajustar os filtros</p>
+            </div>
+        </div>
+    </div>
+</section>
+
     <!-- TELAS -->
     </main>
 
