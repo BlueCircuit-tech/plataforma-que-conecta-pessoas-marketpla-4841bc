@@ -1973,6 +1973,722 @@
   </script>
 </section>
 
+    <section data-tela="pedidos-e-acompanhamento" class="hidden">
+      <!-- Ícones SVG reutilizáveis -->
+      <svg class="hidden" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+        <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+        <symbol id="icon-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></symbol>
+        <symbol id="icon-package" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" y1="22" x2="12" y2="12"/></symbol>
+        <symbol id="icon-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></symbol>
+        <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+        <symbol id="icon-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></symbol>
+        <symbol id="icon-star" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+        <symbol id="icon-star-empty" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+        <symbol id="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+        <symbol id="icon-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
+        <symbol id="icon-shopping-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+        <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+        <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+      </svg>
+
+      <!-- Cabeçalho da tela -->
+      <div class="px-5 pt-2 pb-4">
+        <h1 class="font-display text-2xl font-bold text-gray-900 tracking-tight">Pedidos</h1>
+        <p class="text-sm text-gray-500 mt-1">Acompanhe seus pedidos e status de entrega</p>
+      </div>
+
+      <!-- Busca e Filtro -->
+      <div class="px-5 mb-4 flex gap-2">
+        <div class="flex-1 relative">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"><use href="#icon-search"/></svg>
+          <input id="busca-pedidos" type="text" placeholder="Buscar pedido ou vendedor..."
+            class="w-full pl-9 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-body text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-marca-500/30 focus:border-marca-500 transition-all">
+        </div>
+        <button onclick="pedidos_e_acompanhamento_toggleFiltro()" class="p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-100 active:scale-95 transition-all">
+          <svg class="w-4 h-4"><use href="#icon-filter"/></svg>
+        </button>
+      </div>
+
+      <!-- Filtro rápido (escondido por padrão) -->
+      <div id="filtro-rapido" class="hidden px-5 mb-3">
+        <div class="flex gap-2 overflow-x-auto pb-1 -mx-5 px-5 scrollbar-hide">
+          <button onclick="pedidos_e_acompanhamento_filtrarStatus('todos')" data-filtro="todos" class="filtro-btn flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold bg-marca-600 text-white transition-all">Todos</button>
+          <button onclick="pedidos_e_acompanhamento_filtrarStatus('pendente')" data-filtro="pendente" class="filtro-btn flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all">Pendentes</button>
+          <button onclick="pedidos_e_acompanhamento_filtrarStatus('andamento')" data-filtro="andamento" class="filtro-btn flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all">Em andamento</button>
+          <button onclick="pedidos_e_acompanhamento_filtrarStatus('concluido')" data-filtro="concluido" class="filtro-btn flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all">Concluídos</button>
+        </div>
+      </div>
+
+      <!-- Abas principais -->
+      <div class="px-5 mb-4">
+        <div class="flex bg-gray-100 rounded-xl p-1">
+          <button onclick="pedidos_e_acompanhamento_aba('pendentes')" data-aba="pendentes" class="aba-btn flex-1 py-2 text-xs font-semibold rounded-lg bg-white text-gray-900 shadow-sm transition-all">Pendentes <span class="aba-count ml-1 px-1.5 py-0.5 bg-marca-600 text-white text-[10px] rounded-full">2</span></button>
+          <button onclick="pedidos_e_acompanhamento_aba('andamento')" data-aba="andamento" class="aba-btn flex-1 py-2 text-xs font-semibold rounded-lg text-gray-500 hover:text-gray-700 transition-all">Em andamento <span class="aba-count ml-1 px-1.5 py-0.5 bg-gray-300 text-gray-600 text-[10px] rounded-full">2</span></button>
+          <button onclick="pedidos_e_acompanhamento_aba('concluidos')" data-aba="concluidos" class="aba-btn flex-1 py-2 text-xs font-semibold rounded-lg text-gray-500 hover:text-gray-700 transition-all">Concluídos</button>
+        </div>
+      </div>
+
+      <!-- Lista de pedidos -->
+      <div id="lista-pedidos" class="px-5 pb-24 space-y-3">
+        <!-- Pedidos são renderizados via JS -->
+      </div>
+
+      <!-- Estado vazio -->
+      <div id="estado-vazio" class="hidden px-5 pb-24">
+        <div class="text-center py-12">
+          <div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+            <svg class="w-8 h-8 text-gray-400"><use href="#icon-box"/></svg>
+          </div>
+          <p class="text-sm text-gray-500 font-medium">Nenhum pedido encontrado</p>
+          <p class="text-xs text-gray-400 mt-1">Tente ajustar os filtros ou volte mais tarde</p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Dados dos pedidos
+      const pedidos_e_acompanhamento_pedidos = [
+        {
+          id: 'PED-20491', produto: 'Cafeteira Expresso Automática Nespresso Essenza Mini',
+          vendedor: 'EletroHub SP', fotoGradiente: 'from-amber-100 to-orange-200', iniciais: 'EH',
+          valor: 489.90, dataPedido: '2026-04-28', dataEntrega: '2026-05-05',
+          status: 'andamento', etapa: 2,
+          etapas: [
+            { nome: 'Aguardando aprovação', icon: 'icon-clock', cor: 'text-amber-500' },
+            { nome: 'Pagamento confirmado', icon: 'icon-wallet', cor: 'text-emerald-500' },
+            { nome: 'Enviado', icon: 'icon-truck', cor: 'text-blue-500' },
+            { nome: 'Entregue', icon: 'icon-package', cor: 'text-marca-600' }
+          ],
+          avaliacao: null,
+          endereco: 'Rua Augusta, 1580 - Consolação, São Paulo - SP',
+          formaPagamento: 'Cartão de Crédito (Visa final 4521)',
+          notaFiscal: 'NF-e #452891',
+          rastreio: 'BR123456789BR',
+          historico: [
+            { data: '28/04/2026 14:32', acao: 'Pedido realizado', detalhe: 'Compra aprovada no cartão' },
+            { data: '28/04/2026 14:33', acao: 'Pagamento confirmado', detalhe: 'Transação aprovada pela operadora' },
+            { data: '29/04/2026 09:15', acao: 'Pedido enviado', detalhe: 'Código de rastreio: BR123456789BR' }
+          ]
+        },
+        {
+          id: 'PED-20488', produto: 'Conjunto 3 Camisetas Algodão Orgânico',
+          vendedor: 'ModaVibe Store', fotoGradiente: 'from-pink-100 to-rose-200', iniciais: 'MV',
+          valor: 149.70, dataPedido: '2026-04-27', dataEntrega: '2026-05-03',
+          status: 'andamento', etapa: 3,
+          etapas: [
+            { nome: 'Aguardando aprovação', icon: 'icon-clock', cor: 'text-amber-500' },
+            { nome: 'Pagamento confirmado', icon: 'icon-wallet', cor: 'text-emerald-500' },
+            { nome: 'Enviado', icon: 'icon-truck', cor: 'text-blue-500' },
+            { nome: 'Entregue', icon: 'icon-package', cor: 'text-marca-600' }
+          ],
+          avaliacao: null,
+          endereco: 'Av. Paulista, 900 - Bela Vista, São Paulo - SP',
+          formaPagamento: 'PIX',
+          notaFiscal: 'NF-e #452876',
+          rastreio: 'BR987654321BR',
+          historico: [
+            { data: '27/04/2026 10:05', acao: 'Pedido realizado', detalhe: 'Pagamento via PIX confirmado' },
+            { data: '27/04/2026 10:06', acao: 'Pagamento confirmado', detalhe: 'PIX recebido pelo vendedor' },
+            { data: '28/04/2026 11:30', acao: 'Pedido enviado', detalhe: 'Enviado por SEDEX' }
+          ]
+        },
+        {
+          id: 'PED-20495', produto: 'Kit Ferramentas Profissional 127 Peças',
+          vendedor: 'FerraTudo BH', fotoGradiente: 'from-gray-100 to-slate-300', iniciais: 'FT',
+          valor: 320.00, dataPedido: '2026-04-30', dataEntrega: '2026-05-08',
+          status: 'pendente', etapa: 0,
+          etapas: [
+            { nome: 'Aguardando aprovação', icon: 'icon-clock', cor: 'text-amber-500' },
+            { nome: 'Pagamento confirmado', icon: 'icon-wallet', cor: 'text-emerald-500' },
+            { nome: 'Enviado', icon: 'icon-truck', cor: 'text-blue-500' },
+            { nome: 'Entregue', icon: 'icon-package', cor: 'text-marca-600' }
+          ],
+          avaliacao: null,
+          endereco: 'Rua da Bahia, 450 - Centro, Belo Horizonte - MG',
+          formaPagamento: 'Cartão de Débito (NuBank final 3344)',
+          notaFiscal: 'Pendente',
+          rastreio: 'Aguardando envio',
+          historico: [
+            { data: '30/04/2026 16:45', acao: 'Pedido realizado', detalhe: 'Aguardando aprovação do pagamento' }
+          ]
+        },
+        {
+          id: 'PED-20482', produto: 'Tênis Running Masculino Air Max Pro',
+          vendedor: 'SportMax RJ', fotoGradiente: 'from-cyan-100 to-teal-200', iniciais: 'SM',
+          valor: 599.90, dataPedido: '2026-04-25', dataEntrega: '2026-05-01',
+          status: 'pendente', etapa: 0,
+          etapas: [
+            { nome: 'Aguardando aprovação', icon: 'icon-clock', cor: 'text-amber-500' },
+            { nome: 'Pagamento confirmado', icon: 'icon-wallet', cor: 'text-emerald-500' },
+            { nome: 'Enviado', icon: 'icon-truck', cor: 'text-blue-500' },
+            { nome: 'Entregue', icon: 'icon-package', cor: 'text-marca-600' }
+          ],
+          avaliacao: null,
+          endereco: 'Rua Visconde de Pirajá, 330 - Ipanema, Rio de Janeiro - RJ',
+          formaPagamento: 'Cartão de Crédito (Elo final 7712)',
+          notaFiscal: 'Pendente',
+          rastreio: 'Aguardando envio',
+          historico: [
+            { data: '25/04/2026 08:20', acao: 'Pedido realizado', detalhe: 'Aguardando aprovação do pagamento' }
+          ]
+        },
+        {
+          id: 'PED-20470', produto: 'Smartwatch Fitness Bluetooth 5.3 - Pulseira Extra',
+          vendedor: 'TechMobile BR', fotoGradiente: 'from-indigo-100 to-purple-200', iniciais: 'TM',
+          valor: 279.00, dataPedido: '2026-04-10', dataEntrega: '2026-04-17',
+          status: 'concluido', etapa: 3,
+          etapas: [
+            { nome: 'Aguardando aprovação', icon: 'icon-clock', cor: 'text-amber-500' },
+            { nome: 'Pagamento confirmado', icon: 'icon-wallet', cor: 'text-emerald-500' },
+            { nome: 'Enviado', icon: 'icon-truck', cor: 'text-blue-500' },
+            { nome: 'Entregue', icon: 'icon-package', cor: 'text-marca-600' }
+          ],
+          avaliacao: 5,
+          endereco: 'Rua das Flores, 75 - Jardins, São Paulo - SP',
+          formaPagamento: 'Cartão de Crédito (Visa final 4521)',
+          notaFiscal: 'NF-e #452610',
+          rastreio: 'BR456789123BR',
+          historico: [
+            { data: '10/04/2026 13:10', acao: 'Pedido realizado', detalhe: 'Compra aprovada' },
+            { data: '10/04/2026 13:11', acao: 'Pagamento confirmado', detalhe: 'Transação aprovada' },
+            { data: '11/04/2026 08:40', acao: 'Pedido enviado', detalhe: 'Enviado por PAC' },
+            { data: '17/04/2026 10:22', acao: 'Entrega confirmada', detalhe: 'Pedido recebido' }
+          ]
+        },
+        {
+          id: 'PED-20455', produto: 'Luminária de Mesa LED Regulável Touch',
+          vendedor: 'DecoraFácil', fotoGradiente: 'from-yellow-100 to-amber-200', iniciais: 'DF',
+          valor: 189.90, dataPedido: '2026-04-02', dataEntrega: '2026-04-09',
+          status: 'concluido', etapa: 3,
+          etapas: [
+            { nome: 'Aguardando aprovação', icon: 'icon-clock', cor: 'text-amber-500' },
+            { nome: 'Pagamento confirmado', icon: 'icon-wallet', cor: 'text-emerald-500' },
+            { nome: 'Enviado', icon: 'icon-truck', cor: 'text-blue-500' },
+            { nome: 'Entregue', icon: 'icon-package', cor: 'text-marca-600' }
+          ],
+          avaliacao: 4,
+          endereco: 'Rua Oscar Freire, 200 - Jardins, São Paulo - SP',
+          formaPagamento: 'PIX',
+          notaFiscal: 'NF-e #452489',
+          rastreio: 'BR321654987BR',
+          historico: [
+            { data: '02/04/2026 11:30', acao: 'Pedido realizado', detalhe: 'PIX confirmado' },
+            { data: '02/04/2026 11:31', acao: 'Pagamento confirmado', detalhe: 'PIX recebido' },
+            { data: '03/04/2026 14:00', acao: 'Pedido enviado', detalhe: 'SEDEX 10' },
+            { data: '09/04/2026 09:15', acao: 'Entrega confirmada', detalhe: 'Pedido recebido' }
+          ]
+        },
+        {
+          id: 'PED-20438', produto: 'Fone de Ouvido Bluetooth Noise Cancelling Pro',
+          vendedor: 'AudioPrime', fotoGradiente: 'from-violet-100 to-fuchsia-200', iniciais: 'AP',
+          valor: 349.90, dataPedido: '2026-03-20', dataEntrega: '2026-03-27',
+          status: 'concluido', etapa: 3,
+          etapas: [
+            { nome: 'Aguardando aprovação', icon: 'icon-clock', cor: 'text-amber-500' },
+            { nome: 'Pagamento confirmado', icon: 'icon-wallet', cor: 'text-emerald-500' },
+            { nome: 'Enviado', icon: 'icon-truck', cor: 'text-blue-500' },
+            { nome: 'Entregue', icon: 'icon-package', cor: 'text-marca-600' }
+          ],
+          avaliacao: 5,
+          endereco: 'Av. Rebouças, 3200 - Pinheiros, São Paulo - SP',
+          formaPagamento: 'Cartão de Crédito (Mastercard final 8899)',
+          notaFiscal: 'NF-e #452310',
+          rastreio: 'BR654987321BR',
+          historico: [
+            { data: '20/03/2026 15:40', acao: 'Pedido realizado', detalhe: 'Compra aprovada' },
+            { data: '20/03/2026 15:41', acao: 'Pagamento confirmado', detalhe: 'Transação aprovada' },
+            { data: '21/03/2026 10:00', acao: 'Pedido enviado', detalhe: 'PAC com rastreamento' },
+            { data: '27/03/2026 14:30', acao: 'Entrega confirmada', detalhe: 'Pedido recebido' }
+          ]
+        },
+        {
+          id: 'PED-20425', produto: 'Livro: "Gestão de Produtos Digitais" - 2ª Edição',
+          vendedor: 'Livraria Cultura On', fotoGradiente: 'from-emerald-100 to-green-200', iniciais: 'LC',
+          valor: 79.90, dataPedido: '2026-03-10', dataEntrega: '2026-03-18',
+          status: 'concluido', etapa: 3,
+          etapas: [
+            { nome: 'Aguardando aprovação', icon: 'icon-clock', cor: 'text-amber-500' },
+            { nome: 'Pagamento confirmado', icon: 'icon-wallet', cor: 'text-emerald-500' },
+            { nome: 'Enviado', icon: 'icon-truck', cor: 'text-blue-500' },
+            { nome: 'Entregue', icon: 'icon-package', cor: 'text-marca-600' }
+          ],
+          avaliacao: 4,
+          endereco: 'Rua Minas Gerais, 90 - Centro, Campinas - SP',
+          formaPagamento: 'Cartão de Crédito (Visa final 4521)',
+          notaFiscal: 'NF-e #452180',
+          rastreio: 'BR111222333BR',
+          historico: [
+            { data: '10/03/2026 09:00', acao: 'Pedido realizado', detalhe: 'Compra aprovada' },
+            { data: '10/03/2026 09:01', acao: 'Pagamento confirmado', detalhe: 'Transação aprovada' },
+            { data: '11/03/2026 08:00', acao: 'Pedido enviado', detalhe: 'Enviado por transportadora' },
+            { data: '18/03/2026 11:00', acao: 'Entrega confirmada', detalhe: 'Pedido recebido' }
+          ]
+        },
+        {
+          id: 'PED-20412', produto: 'Planta Suculenta em Vaso Cerâmica Artesanal',
+          vendedor: 'Jardim Vertical MG', fotoGradiente: 'from-lime-100 to-green-200', iniciais: 'JV',
+          valor: 65.00, dataPedido: '2026-03-01', dataEntrega: '2026-03-08',
+          status: 'concluido', etapa: 3,
+          etapas: [
+            { nome: 'Aguardando aprovação', icon: 'icon-clock', cor: 'text-amber-500' },
+            { nome: 'Pagamento confirmado', icon: 'icon-wallet', cor: 'text-emerald-500' },
+            { nome: 'Enviado', icon: 'icon-truck', cor: 'text-blue-500' },
+            { nome: 'Entregue', icon: 'icon-package', cor: 'text-marca-600' }
+          ],
+          avaliacao: 5,
+          endereco: 'Rua Pernambuco, 210 - Savassi, Belo Horizonte - MG',
+          formaPagamento: 'PIX',
+          notaFiscal: 'NF-e #452055',
+          rastreio: 'BR555666777BR',
+          historico: [
+            { data: '01/03/2026 14:22', acao: 'Pedido realizado', detalhe: 'PIX confirmado' },
+            { data: '01/03/2026 14:23', acao: 'Pagamento confirmado', detalhe: 'PIX recebido' },
+            { data: '02/03/2026 16:00', acao: 'Pedido enviado', detalhe: 'Enviado com embalagem especial' },
+            { data: '08/03/2026 10:45', acao: 'Entrega confirmada', detalhe: 'Chegou em perfeito estado!' }
+          ]
+        }
+      ];
+
+      let pedidos_e_acompanhamento_abaAtual = 'pendentes';
+      let pedidos_e_acompanhamento_filtroAtual = 'todos';
+      let pedidos_e_acompanhamento_pedidoAberto = null;
+
+      function pedidos_e_acompanhamento_iniciar() {
+        pedidos_e_acompanhamento_renderizar();
+        // listener de busca
+        setTimeout(() => {
+          const buscaEl = document.getElementById('busca-pedidos');
+          if (buscaEl) {
+            buscaEl.addEventListener('input', debounce(function() {
+              pedidos_e_acompanhamento_aplicarFiltros();
+            }, 250));
+          }
+        }, 100);
+      }
+
+      function debounce(fn, ms) {
+        let t;
+        return function(...args) { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), ms); };
+      }
+
+      function pedidos_e_acompanhamento_aba(aba) {
+        pedidos_e_acompanhamento_abaAtual = aba;
+        document.querySelectorAll('.aba-btn').forEach(b => {
+          if (b.dataset.aba === aba) {
+            b.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+            b.classList.remove('text-gray-500');
+            const count = b.querySelector('.aba-count');
+            if (count) { count.classList.remove('bg-gray-300', 'text-gray-600'); count.classList.add('bg-marca-600', 'text-white'); }
+          } else {
+            b.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
+            b.classList.add('text-gray-500');
+            const count = b.querySelector('.aba-count');
+            if (count) { count.classList.add('bg-gray-300', 'text-gray-600'); count.classList.remove('bg-marca-600', 'text-white'); }
+          }
+        });
+        pedidos_e_acompanhamento_aplicarFiltros();
+      }
+
+      function pedidos_e_acompanhamento_toggleFiltro() {
+        const el = document.getElementById('filtro-rapido');
+        el.classList.toggle('hidden');
+        if (!el.classList.contains('hidden')) {
+          el.style.animation = 'fadeIn 0.25s ease-out';
+        }
+      }
+
+      function pedidos_e_acompanhamento_filtrarStatus(filtro) {
+        pedidos_e_acompanhamento_filtroAtual = filtro;
+        document.querySelectorAll('.filtro-btn').forEach(b => {
+          if (b.dataset.filtro === filtro) {
+            b.classList.add('bg-marca-600', 'text-white');
+            b.classList.remove('bg-gray-100', 'text-gray-600');
+          } else {
+            b.classList.remove('bg-marca-600', 'text-white');
+            b.classList.add('bg-gray-100', 'text-gray-600');
+          }
+        });
+        pedidos_e_acompanhamento_aplicarFiltros();
+      }
+
+      function pedidos_e_acompanhamento_aplicarFiltros() {
+        const busca = (document.getElementById('busca-pedidos')?.value || '').toLowerCase().trim();
+        let filtrados = pedidos_e_acompanhamento_pedidos;
+
+        // filtro por aba
+        if (pedidos_e_acompanhamento_abaAtual === 'pendentes') {
+          filtrados = filtrados.filter(p => p.status === 'pendente');
+        } else if (pedidos_e_acompanhamento_abaAtual === 'andamento') {
+          filtrados = filtrados.filter(p => p.status === 'andamento');
+        } else if (pedidos_e_acompanhamento_abaAtual === 'concluidos') {
+          filtrados = filtrados.filter(p => p.status === 'concluido');
+        }
+
+        // filtro por status (se não for 'todos')
+        if (pedidos_e_acompanhamento_filtroAtual !== 'todos') {
+          filtrados = filtrados.filter(p => p.status === pedidos_e_acompanhamento_filtroAtual);
+        }
+
+        // busca
+        if (busca) {
+          filtrados = filtrados.filter(p =>
+            p.produto.toLowerCase().includes(busca) ||
+            p.vendedor.toLowerCase().includes(busca) ||
+            p.id.toLowerCase().includes(busca)
+          );
+        }
+
+        pedidos_e_acompanhamento_renderizarLista(filtrados);
+      }
+
+      function pedidos_e_acompanhamento_renderizar() {
+        pedidos_e_acompanhamento_renderizarLista(pedidos_e_acompanhamento_pedidos);
+      }
+
+      function pedidos_e_acompanhamento_renderizarLista(pedidos) {
+        const container = document.getElementById('lista-pedidos');
+        const vazio = document.getElementById('estado-vazio');
+
+        if (pedidos.length === 0) {
+          container.classList.add('hidden');
+          vazio.classList.remove('hidden');
+          return;
+        }
+        container.classList.remove('hidden');
+        vazio.classList.add('hidden');
+
+        // ordena: pendentes primeiro, depois andamento, depois concluidos; dentro de cada grupo por data
+        const ordem = { pendente: 0, andamento: 1, concluido: 2 };
+        pedidos.sort((a, b) => {
+          const d = ordem[a.status] - ordem[b.status];
+          return d !== 0 ? d : new Date(b.dataPedido) - new Date(a.dataPedido);
+        });
+
+        container.innerHTML = pedidos.map(p => pedidos_e_acompanhamento_criarCard(p)).join('');
+
+        // eventos de clique nos cards
+        container.querySelectorAll('[data-pedido-id]').forEach(card => {
+          card.addEventListener('click', function(e) {
+            if (e.target.closest('button')) return;
+            const pid = this.dataset.pedidoId;
+            pedidos_e_acompanhamento_abrirDetalhe(pid);
+          });
+        });
+
+        // botões confirmar recebimento
+        container.querySelectorAll('[data-confirmar-id]').forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const pid = this.dataset.confirmarId;
+            pedidos_e_acompanhamento_confirmarRecebimento(pid, this);
+          });
+        });
+
+        // botões reabrir chat
+        container.querySelectorAll('[data-chat-id]').forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const pid = this.dataset.chatId;
+            pedidos_e_acompanhamento_abrirChat(pid);
+          });
+        });
+
+        // botões avaliar
+        container.querySelectorAll('[data-avaliar-id]').forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const pid = this.dataset.avaliarId;
+            const nota = parseInt(this.dataset.nota);
+            pedidos_e_acompanhamento_avaliar(pid, nota, this);
+          });
+        });
+      }
+
+      function pedidos_e_acompanhamento_criarCard(p) {
+        const etapaAtual = p.etapas[p.etapa];
+        const statusLabel = { pendente: 'Pendente', andamento: 'Em andamento', concluido: 'Concluído' };
+        const statusBadgeColor = {
+          pendente: 'bg-amber-100 text-amber-700',
+          andamento: 'bg-blue-100 text-blue-700',
+          concluido: 'bg-emerald-100 text-emerald-700'
+        };
+        const isAtivo = p.status === 'andamento' || p.status === 'pendente';
+
+        // timeline inline
+        let timelineHTML = '';
+        if (p.status !== 'pendente' || p.etapa > 0) {
+          timelineHTML = '<div class="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">';
+          p.etapas.forEach((et, i) => {
+            const done = i <= p.etapa;
+            const active = i === p.etapa && p.status === 'andamento';
+            timelineHTML += `
+              <div class="flex flex-col items-center gap-1">
+                <div class="w-7 h-7 rounded-full flex items-center justify-center ${done ? 'bg-marca-600 text-white' : 'bg-gray-200 text-gray-400'} ${active ? 'ring-2 ring-marca-200 ring-offset-1' : ''}">
+                  <svg class="w-3.5 h-3.5"><use href="#${et.icon}"/></svg>
+                </div>
+                <span class="text-[9px] font-medium ${done ? 'text-gray-700' : 'text-gray-400'} leading-tight text-center">${et.nome.split(' ')[0]}</span>
+              </div>`;
+            if (i < p.etapas.length - 1) {
+              const connDone = i < p.etapa;
+              timelineHTML += `<div class="flex-1 h-0.5 mx-0.5 ${connDone ? 'bg-marca-600' : 'bg-gray-200'} rounded-full"></div>`;
+            }
+          });
+          timelineHTML += '</div>';
+        }
+
+        // botões de ação
+        let acoesHTML = '';
+        if (p.status === 'andamento') {
+          acoesHTML = `
+            <button data-confirmar-id="${p.id}" class="w-full mt-3 py-2.5 bg-marca-600 hover:bg-marca-700 active:bg-marca-800 text-white text-sm font-semibold rounded-xl active:scale-[0.97] transition-all flex items-center justify-center gap-2">
+              <svg class="w-4 h-4"><use href="#icon-check"/></svg>
+              Confirmar Recebimento
+            </button>`;
+        }
+        if (p.status === 'concluido') {
+          acoesHTML = `
+            <div class="flex gap-2 mt-3">
+              <button data-chat-id="${p.id}" class="flex-1 py-2.5 border border-gray-200 text-gray-600 text-xs font-semibold rounded-xl hover:bg-gray-50 active:scale-[0.97] transition-all flex items-center justify-center gap-1.5">
+                <svg class="w-3.5 h-3.5"><use href="#icon-chat"/></svg>
+                Chat
+              </button>
+              ${!p.avaliacao ? `<button data-avaliar-id="${p.id}" class="flex-1 py-2.5 border border-gray-200 text-gray-600 text-xs font-semibold rounded-xl hover:bg-gray-50 active:scale-[0.97] transition-all flex items-center justify-center gap-1.5">
+                <svg class="w-3.5 h-3.5"><use href="#icon-star"/></svg>
+                Avaliar
+              </button>` : ''}
+            </div>`;
+        }
+
+        return `
+          <div data-pedido-id="${p.id}" class="card p-4 cursor-pointer hover:shadow-md active:scale-[0.99] transition-all">
+            <div class="flex gap-3">
+              <!-- Foto do produto -->
+              <div class="w-20 h-20 rounded-xl bg-gradient-to-br ${p.fotoGradiente} flex items-center justify-center flex-shrink-0 overflow-hidden relative">
+                <div class="w-12 h-12 bg-white/40 rounded-lg flex items-center justify-center">
+                  <svg class="w-7 h-7 text-gray-600/70"><use href="#icon-shopping-bag"/></svg>
+                </div>
+                <span class="absolute bottom-0.5 right-1 text-[8px] font-bold text-gray-500/60">#${p.id.split('-')[1]}</span>
+              </div>
+              <!-- Info -->
+              <div class="flex-1 min-w-0">
+                <div class="flex items-start justify-between gap-2">
+                  <h3 class="text-sm font-semibold text-gray-900 leading-tight line-clamp-2 font-display">${p.produto}</h3>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">${p.vendedor}</p>
+                <div class="flex items-center justify-between mt-2">
+                  <span class="text-base font-bold text-gray-900">${brl(p.valor)}</span>
+                  <span class="badge ${statusBadgeColor[p.status]} text-[10px] font-semibold px-2 py-0.5 rounded-full">${statusLabel[p.status]}</span>
+                </div>
+                <p class="text-[11px] text-gray-400 mt-1">${dataBR(p.dataPedido)}${p.dataEntrega ? ' · Entrega: ' + dataBR(p.dataEntrega) : ''}</p>
+              </div>
+            </div>
+            ${timelineHTML}
+            ${acoesHTML}
+          </div>`;
+      }
+
+      function pedidos_e_acompanhamento_abrirDetalhe(pid) {
+        const p = pedidos_e_acompanhamento_pedidos.find(x => x.id === pid);
+        if (!p) return;
+        pedidos_e_acompanhamento_pedidoAberto = p;
+
+        const statusLabel = { pendente: 'Pendente', andamento: 'Em andamento', concluido: 'Concluído' };
+        const statusBadgeColor = { pendente: 'bg-amber-100 text-amber-700', andamento: 'bg-blue-100 text-blue-700', concluido: 'bg-emerald-100 text-emerald-700' };
+
+        // estrelas de avaliação
+        let estrelasHTML = '';
+        if (p.status === 'concluido' && !p.avaliacao) {
+          estrelasHTML = '<div class="flex items-center gap-1 mt-3"><span class="text-xs text-gray-500 mr-1">Avalie este pedido:</span>';
+          for (let s = 1; s <= 5; s++) {
+            estrelasHTML += `<button data-avaliar-id="${p.id}" data-nota="${s}" class="p-1 text-gray-300 hover:text-amber-400 transition-colors"><svg class="w-5 h-5"><use href="#icon-star-empty"/></svg></button>`;
+          }
+          estrelasHTML += '</div>';
+        } else if (p.avaliacao) {
+          estrelasHTML = '<div class="flex items-center gap-0.5 mt-3">';
+          for (let s = 1; s <= 5; s++) {
+            estrelasHTML += `<svg class="w-4 h-4 ${s <= p.avaliacao ? 'text-amber-400' : 'text-gray-300'}"><use href="#icon-star"/></svg>`;
+          }
+          estrelasHTML += `<span class="text-xs text-gray-500 ml-2">${p.avaliacao}/5</span></div>`;
+        }
+
+        // timeline detalhada
+        let timelineHTML = '<div class="space-y-3 mt-4">';
+        p.etapas.forEach((et, i) => {
+          const done = i <= p.etapa;
+          const active = i === p.etapa && p.status === 'andamento';
+          timelineHTML += `
+            <div class="flex gap-3">
+              <div class="flex flex-col items-center">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center ${done ? 'bg-marca-600 text-white' : 'bg-gray-200 text-gray-400'} ${active ? 'ring-2 ring-marca-200' : ''}">
+                  <svg class="w-4 h-4"><use href="#${et.icon}"/></svg>
+                </div>
+                ${i < p.etapas.length - 1 ? `<div class="w-0.5 flex-1 ${i < p.etapa ? 'bg-marca-600' : 'bg-gray-200'} mt-1"></div>` : ''}
+              </div>
+              <div class="pb-3">
+                <p class="text-sm font-semibold ${done ? 'text-gray-900' : 'text-gray-400'}">${et.nome}</p>
+                ${done ? `<p class="text-xs text-gray-500 mt-0.5">${p.historico[i]?.detalhe || 'Concluído'}</p>` : ''}
+                ${active ? `<span class="inline-block mt-1 text-[10px] font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">Etapa atual</span>` : ''}
+              </div>
+            </div>`;
+        });
+        timelineHTML += '</div>';
+
+        const html = `
+          <div class="space-y-4">
+            <!-- Cabeçalho do pedido -->
+            <div class="flex gap-3">
+              <div class="w-16 h-16 rounded-xl bg-gradient-to-br ${p.fotoGradiente} flex items-center justify-center flex-shrink-0">
+                <svg class="w-8 h-8 text-gray-600/70"><use href="#icon-shopping-bag"/></svg>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-sm font-semibold text-gray-900 font-display leading-tight">${p.produto}</h3>
+                <p class="text-xs text-gray-500 mt-0.5">${p.vendedor}</p>
+                <span class="badge ${statusBadgeColor[p.status]} text-[10px] font-semibold px-2 py-0.5 rounded-full mt-1 inline-block">${statusLabel[p.status]}</span>
+              </div>
+            </div>
+
+            <!-- Dados do pedido -->
+            <div class="bg-gray-50 rounded-xl p-3 space-y-2">
+              <div class="flex justify-between text-xs">
+                <span class="text-gray-500">Valor</span>
+                <span class="font-semibold text-gray-900">${brl(p.valor)}</span>
+              </div>
+              <div class="flex justify-between text-xs">
+                <span class="text-gray-500">Pedido</span>
+                <span class="font-medium text-gray-700">${p.id} · ${dataBR(p.dataPedido)}</span>
+              </div>
+              <div class="flex justify-between text-xs">
+                <span class="text-gray-500">Pagamento</span>
+                <span class="font-medium text-gray-700">${p.formaPagamento}</span>
+              </div>
+              <div class="flex justify-between text-xs">
+                <span class="text-gray-500">Entrega</span>
+                <span class="font-medium text-gray-700">${dataBR(p.dataEntrega)}</span>
+              </div>
+              <div class="flex justify-between text-xs">
+                <span class="text-gray-500">Endereço</span>
+                <span class="font-medium text-gray-700 text-right max-w-[60%]">${p.endereco}</span>
+              </div>
+              <div class="flex justify-between text-xs">
+                <span class="text-gray-500">Rastreio</span>
+                <span class="font-medium text-marca-600">${p.rastreio}</span>
+              </div>
+            </div>
+
+            <!-- Timeline -->
+            <div>
+              <p class="text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide">Acompanhamento</p>
+              ${timelineHTML}
+            </div>
+
+            <!-- Avaliação -->
+            <div class="border-t border-gray-100 pt-3">
+              <p class="text-xs font-semibold text-gray-700 uppercase tracking-wide">Avaliação</p>
+              ${estrelasHTML}
+            </div>
+
+            <!-- Histórico -->
+            <div class="border-t border-gray-100 pt-3">
+              <p class="text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide">Histórico</p>
+              <div class="space-y-2">
+                ${p.historico.slice().reverse().map(h => `
+                  <div class="flex gap-2">
+                    <div class="w-1.5 h-1.5 rounded-full bg-marca-400 mt-1.5 flex-shrink-0"></div>
+                    <div>
+                      <p class="text-xs font-medium text-gray-800">${h.acao}</p>
+                      <p class="text-[11px] text-gray-500">${h.detalhe}</p>
+                      <p class="text-[10px] text-gray-400">${h.data}</p>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Botões -->
+            <div class="flex gap-2 pt-2">
+              ${p.status === 'andamento' ? `<button data-confirmar-id="${p.id}" class="flex-1 py-3 bg-marca-600 hover:bg-marca-700 text-white text-sm font-semibold rounded-xl active:scale-[0.97] transition-all flex items-center justify-center gap-2">
+                <svg class="w-4 h-4"><use href="#icon-check"/></svg> Confirmar Recebimento
+              </button>` : ''}
+              <button data-chat-id="${p.id}" class="flex-1 py-3 border border-gray-200 text-gray-700 text-sm font-semibold rounded-xl hover:bg-gray-50 active:scale-[0.97] transition-all flex items-center justify-center gap-2">
+                <svg class="w-4 h-4"><use href="#icon-chat"/></svg> Chat com Vendedor
+              </button>
+            </div>
+          </div>
+        `;
+
+        abrirModal(html, `Pedido ${p.id}`);
+      }
+
+      function pedidos_e_acompanhamento_confirmarRecebimento(pid, btn) {
+        const p = pedidos_e_acompanhamento_pedidos.find(x => x.id === pid);
+        if (!p) return;
+
+        // Modal de confirmação
+        const html = `
+          <div class="space-y-4 text-center py-2">
+            <div class="w-14 h-14 mx-auto bg-emerald-100 rounded-full flex items-center justify-center">
+              <svg class="w-7 h-7 text-emerald-600"><use href="#icon-check"/></svg>
+            </div>
+            <p class="text-sm text-gray-600">Você confirma o recebimento do pedido <strong>${pid}</strong>?</p>
+            <p class="text-xs text-gray-400">${p.produto}</p>
+            <div class="flex gap-2">
+              <button onclick="fecharModal()" class="flex-1 py-2.5 border border-gray-200 text-gray-600 text-sm font-semibold rounded-xl hover:bg-gray-50 active:scale-[0.97] transition-all">Cancelar</button>
+              <button onclick="pedidos_e_acompanhamento_executarConfirmacao('${pid}')" class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-xl active:scale-[0.97] transition-all">Confirmar</button>
+            </div>
+          </div>
+        `;
+        abrirModal(html, 'Confirmar Recebimento');
+      }
+
+      function pedidos_e_acompanhamento_executarConfirmacao(pid) {
+        fecharModal();
+        const p = pedidos_e_acompanhamento_pedidos.find(x => x.id === pid);
+        if (!p) return;
+        p.status = 'concluido';
+        p.etapa = 3;
+        p.historico.push({ data: new Date().toLocaleString('pt-BR'), acao: 'Entrega confirmada', detalhe: 'Comprador confirmou recebimento' });
+        pedidos_e_acompanhamento_aplicarFiltros();
+        toast('Recebimento confirmado com sucesso!', 'ok');
+      }
+
+      function pedidos_e_acompanhamento_avaliar(pid, nota, btn) {
+        const p = pedidos_e_acompanhamento_pedidos.find(x => x.id === pid);
+        if (!p) return;
+        p.avaliacao = nota;
+        p.historico.push({ data: new Date().toLocaleString('pt-BR'), acao: 'Pedido avaliado', detalhe: `Nota: ${nota}/5 estrelas` });
+        pedidos_e_acompanhamento_aplicarFiltros();
+        toast('Avaliação registrada! Obrigado.', 'ok');
+        // se modal aberto, reabre para refletir
+        if (pedidos_e_acompanhamento_pedidoAberto && pedidos_e_acompanhamento_pedidoAberto.id === pid) {
+          pedidos_e_acompanhamento_abrirDetalhe(pid);
+        }
+      }
+
+      function pedidos_e_acompanhamento_abrirChat(pid) {
+        const p = pedidos_e_acompanhamento_pedidos.find(x => x.id === pid);
+        if (!p) return;
+        mostrarTela('chat-da-negociacao');
+      }
+
+      // Inicializa ao mostrar a tela
+      const observer = new MutationObserver(() => {
+        const el = document.querySelector('[data-tela="pedidos-e-acompanhamento"]');
+        if (el && !el.classList.contains('hidden')) {
+          pedidos_e_acompanhamento_iniciar();
+        }
+      });
+      observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
+
+      // fallback: tenta iniciar imediatamente se a seção já estiver visível
+      setTimeout(() => {
+        const el = document.querySelector('[data-tela="pedidos-e-acompanhamento"]');
+        if (el && !el.classList.contains('hidden') && pedidos_e_acompanhamento_pedidos.length > 0) {
+          pedidos_e_acompanhamento_iniciar();
+        }
+      }, 300);
+    </script>
+
     <!-- TELAS -->
     </main>
 
