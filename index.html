@@ -459,6 +459,370 @@
     })();
     </script>
 
+    <section data-tela="detalhe-do-anuncio" class="hidden">
+      <!-- Carrossel de Fotos -->
+      <div class="relative" id="carrossel-container">
+        <div class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide" id="carrossel-fotos" style="scroll-behavior:smooth;-webkit-overflow-scrolling:touch;">
+          <div class="snap-center shrink-0 w-full aspect-square bg-gradient-to-br from-amber-100 via-orange-50 to-stone-200 flex items-center justify-center" style="min-width:100%;">
+            <div class="text-center">
+              <svg class="w-20 h-20 text-stone-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" stroke-width="1.5"/><path d="M22 10H2" stroke-width="1.5"/><path d="M6 10v4" stroke-width="1.5" stroke-linecap="round"/><path d="M10 10v4" stroke-width="1.5" stroke-linecap="round"/><path d="M14 10v4" stroke-width="1.5" stroke-linecap="round"/><path d="M18 10v4" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <p class="text-stone-400 text-sm">Sofá Retrátil 3 Lugares - Vista frontal</p>
+            </div>
+          </div>
+          <div class="snap-center shrink-0 w-full aspect-square bg-gradient-to-br from-stone-200 via-amber-50 to-orange-100 flex items-center justify-center" style="min-width:100%;">
+            <div class="text-center">
+              <svg class="w-20 h-20 text-stone-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" stroke-width="1.5"/><path d="M22 10H2" stroke-width="1.5"/><path d="M2 10v4" stroke-width="1.5" stroke-linecap="round"/><path d="M6 10v4" stroke-width="1.5" stroke-linecap="round"/><path d="M10 10v4" stroke-width="1.5" stroke-linecap="round"/><path d="M14 10v4" stroke-width="1.5" stroke-linecap="round"/><path d="M18 10v4" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <p class="text-stone-400 text-sm">Vista lateral - detalhe do encosto</p>
+            </div>
+          </div>
+          <div class="snap-center shrink-0 w-full aspect-square bg-gradient-to-br from-orange-100 via-stone-100 to-amber-50 flex items-center justify-center" style="min-width:100%;">
+            <div class="text-center">
+              <svg class="w-20 h-20 text-stone-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" stroke-width="1.5"/><path d="M22 10H2" stroke-width="1.5"/><path d="M2 10v4" stroke-width="1.5" stroke-linecap="round"/><path d="M6 10v4" stroke-width="1.5" stroke-linecap="round"/><path d="M10 10v4" stroke-width="1.5" stroke-linecap="round"/><path d="M14 10v4" stroke-width="1.5" stroke-linecap="round"/><path d="M18 10v4" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <p class="text-stone-400 text-sm">Detalhe do couro legítimo</p>
+            </div>
+          </div>
+          <div class="snap-center shrink-0 w-full aspect-square bg-gradient-to-br from-yellow-50 via-orange-100 to-stone-200 flex items-center justify-center" style="min-width:100%;">
+            <div class="text-center">
+              <svg class="w-20 h-20 text-stone-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke-width="1.5"/><polyline points="9 22 9 12 15 12 15 22" stroke-width="1.5"/></svg>
+              <p class="text-stone-400 text-sm">Sofá em ambiente decorado</p>
+            </div>
+          </div>
+          <div class="snap-center shrink-0 w-full aspect-square bg-gradient-to-br from-stone-100 via-amber-50 to-yellow-50 flex items-center justify-center" style="min-width:100%;">
+            <div class="text-center">
+              <svg class="w-20 h-20 text-stone-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.5"/><line x1="9" y1="3" x2="9" y2="21" stroke-width="1.5"/><line x1="3" y1="9" x2="21" y2="9" stroke-width="1.5"/></svg>
+              <p class="text-stone-400 text-sm">Dimensões e especificações</p>
+            </div>
+          </div>
+        </div>
+        <button onclick="detalhe_do_anuncio_carrossel_ant()" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 shadow-md flex items-center justify-center active:scale-90 transition-transform z-10">
+          <svg class="w-5 h-5 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button onclick="detalhe_do_anuncio_carrossel_prox()" class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 shadow-md flex items-center justify-center active:scale-90 transition-transform z-10">
+          <svg class="w-5 h-5 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </button>
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5" id="carrossel-indicadores"></div>
+      </div>
+
+      <!-- Informações do Anúncio -->
+      <div class="px-5 pt-5 pb-3">
+        <div class="flex items-start justify-between gap-3">
+          <div class="flex-1">
+            <h1 class="font-display text-xl font-bold text-stone-800 leading-tight">Sofá Retrátil 3 Lugares - Couro Legítimo Caramelo</h1>
+            <p class="text-amber-700 font-display text-2xl font-bold mt-2">R$ 2.890</p>
+            <p class="text-stone-400 text-xs mt-1">R$ 2.890 <span class="line-through">R$ 4.200</span> — <span class="text-green-600 font-medium">31% OFF</span></p>
+          </div>
+          <button onclick="detalhe_do_anuncio_alternar_favorito()" id="btn-favorito" class="shrink-0 w-11 h-11 rounded-full border border-stone-200 bg-white flex items-center justify-center active:scale-90 transition-all shadow-sm">
+            <svg id="icone-favorito" class="w-5 h-5 text-stone-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          </button>
+        </div>
+
+        <!-- Info rápida -->
+        <div class="flex flex-wrap gap-2 mt-4">
+          <span class="badge badge-success">Usado — Seminovo</span>
+          <span class="badge">São Paulo, SP</span>
+          <span class="badge">Retirada ou frete</span>
+        </div>
+      </div>
+
+      <div class="mx-5 border-t border-stone-100"></div>
+
+      <!-- Dados do Vendedor -->
+      <div class="px-5 py-4">
+        <div class="flex items-center gap-3 cursor-pointer active:bg-stone-50 -mx-2 px-2 py-1.5 rounded-xl transition-colors" onclick="mostrarTela('perfil-e-conta')">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white font-display font-bold text-lg shrink-0">CM</div>
+          <div class="flex-1 min-w-0">
+            <p class="font-display font-semibold text-stone-800 text-sm">Carlos Mendes</p>
+            <div class="flex items-center gap-1 mt-0.5">
+              <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <span class="text-stone-700 text-sm font-medium">4,8</span>
+              <span class="text-stone-400 text-xs">(23 avaliações)</span>
+            </div>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="text-stone-400 text-[11px]">Membro desde</p>
+            <p class="text-stone-600 text-xs font-medium">Fev 2023</p>
+          </div>
+          <svg class="w-4 h-4 text-stone-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </div>
+        <div class="flex gap-3 mt-3">
+          <div class="flex items-center gap-1 text-xs text-stone-500">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            Vendedor verificado
+          </div>
+          <div class="flex items-center gap-1 text-xs text-stone-500">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            47 anúncios
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-5 border-t border-stone-100"></div>
+
+      <!-- Descrição -->
+      <div class="px-5 py-4">
+        <h2 class="font-display font-bold text-stone-800 text-base mb-2">Descrição</h2>
+        <p class="text-stone-600 text-sm leading-relaxed">Sofá retrátil 3 lugares em couro legítimo cor caramelo. Peça seminova, sem marcas de uso ou avarias. Estrutura em madeira maciça maciça, espuma D33 de alta densidade. Medidas: 2,20m de largura x 0,90m de profundidade. Disponível para retirada no bairro Moema ou envio por transportadora (frete por conta do comprador). Aceito Pix como forma de pagamento. Qualquer dúvida, estou à disposição pelo chat!</p>
+        <div class="flex flex-wrap gap-2 mt-3">
+          <span class="text-xs bg-stone-100 text-stone-600 px-2.5 py-1 rounded-full">Couro legítimo</span>
+          <span class="text-xs bg-stone-100 text-stone-600 px-2.5 py-1 rounded-full">3 lugares</span>
+          <span class="text-xs bg-stone-100 text-stone-600 px-2.5 py-1 rounded-full">Seminovo</span>
+          <span class="text-xs bg-stone-100 text-stone-600 px-2.5 py-1 rounded-full">Retrátil</span>
+        </div>
+      </div>
+
+      <div class="mx-5 border-t border-stone-100"></div>
+
+      <!-- Botões de Ação -->
+      <div class="px-5 py-4">
+        <div class="grid grid-cols-3 gap-3">
+          <button onclick="mostrarTela('chat-da-negociacao')" class="col-span-1 bg-amber-600 hover:bg-amber-700 text-white font-display font-semibold text-sm py-3.5 rounded-2xl flex flex-col items-center gap-1 active:scale-95 transition-all shadow-md shadow-amber-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-4.272C3.512 14.042 3 12.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            Chat
+          </button>
+          <button onclick="detalhe_do_anuncio_alternar_favorito()" class="col-span-1 bg-white border-2 border-stone-200 hover:border-stone-300 text-stone-700 font-display font-semibold text-sm py-3.5 rounded-2xl flex flex-col items-center gap-1 active:scale-95 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            Favoritar
+          </button>
+          <button onclick="detalhe_do_anuncio_abrir_compra()" class="col-span-1 bg-emerald-600 hover:bg-emerald-700 text-white font-display font-semibold text-sm py-3.5 rounded-2xl flex flex-col items-center gap-1 active:scale-95 transition-all shadow-md shadow-emerald-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            Comprar
+          </button>
+        </div>
+        <p class="text-center text-xs text-stone-400 mt-2.5">Compra protegida — seus dados estão seguros</p>
+      </div>
+
+      <div class="mx-5 border-t border-stone-100"></div>
+
+      <!-- Localização -->
+      <div class="px-5 py-4">
+        <h2 class="font-display font-bold text-stone-800 text-base mb-2">Localização</h2>
+        <div class="bg-stone-50 rounded-2xl p-4 flex items-start gap-3">
+          <svg class="w-5 h-5 text-amber-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243A8 8 0 1117.657 16.657z"/><circle cx="12" cy="11" r="1.5" fill="currentColor" stroke="none"/></svg>
+          <div>
+            <p class="text-stone-700 text-sm font-medium">Moema, São Paulo — SP</p>
+            <p class="text-stone-400 text-xs mt-0.5">Cep: 04094-050 · A 3 km de você</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-5 border-t border-stone-100"></div>
+
+      <!-- Produtos Similares -->
+      <div class="px-5 py-5">
+        <h2 class="font-display font-bold text-stone-800 text-base mb-3">Produtos similares</h2>
+        <div class="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 snap-x snap-mandatory" id="produtos-similares-scroll" style="scroll-behavior:smooth;-webkit-overflow-scrolling:touch;">
+          <div onclick="mostrarTela('detalhe-do-anuncio')" class="shrink-0 w-36 card cursor-pointer snap-start">
+            <div class="aspect-square bg-gradient-to-br from-stone-200 to-stone-300 rounded-t-2xl flex items-center justify-center">
+              <svg class="w-10 h-10 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2" stroke-width="1.5"/><path d="M22 10H2" stroke-width="1.5"/></svg>
+            </div>
+            <div class="p-2.5">
+              <p class="text-xs font-medium text-stone-700 line-clamp-2 leading-tight">Cadeira de Escritório Executiva</p>
+              <p class="text-amber-700 font-display font-bold text-sm mt-1">R$ 890</p>
+            </div>
+          </div>
+          <div onclick="mostrarTela('detalhe-do-anuncio')" class="shrink-0 w-36 card cursor-pointer snap-start">
+            <div class="aspect-square bg-gradient-to-br from-amber-100 to-orange-100 rounded-t-2xl flex items-center justify-center">
+              <svg class="w-10 h-10 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="8" width="20" height="12" rx="1" stroke-width="1.5"/><path d="M6 8V6a2 2 0 012-2h8a2 2 0 012 2v2" stroke-width="1.5"/></svg>
+            </div>
+            <div class="p-2.5">
+              <p class="text-xs font-medium text-stone-700 line-clamp-2 leading-tight">Estante de Madeira Maciça 1,8m</p>
+              <p class="text-amber-700 font-display font-bold text-sm mt-1">R$ 1.200</p>
+            </div>
+          </div>
+          <div onclick="mostrarTela('detalhe-do-anuncio')" class="shrink-0 w-36 card cursor-pointer snap-start">
+            <div class="aspect-square bg-gradient-to-br from-yellow-100 to-amber-50 rounded-t-2xl flex items-center justify-center">
+              <svg class="w-10 h-10 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="10" width="20" height="10" rx="1" stroke-width="1.5"/><path d="M12 10V5M8 7l4-2 4 2" stroke-width="1.5"/></svg>
+            </div>
+            <div class="p-2.5">
+              <p class="text-xs font-medium text-stone-700 line-clamp-2 leading-tight">Mesa de Jantar 6 Lugares</p>
+              <p class="text-amber-700 font-display font-bold text-sm mt-1">R$ 1.650</p>
+            </div>
+          </div>
+          <div onclick="mostrarTela('detalhe-do-anuncio')" class="shrink-0 w-36 card cursor-pointer snap-start">
+            <div class="aspect-square bg-gradient-to-br from-orange-100 to-stone-200 rounded-t-2xl flex items-center justify-center">
+              <svg class="w-10 h-10 text-orange-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1" stroke-width="1.5"/><line x1="3" y1="9" x2="21" y2="9" stroke-width="1.5"/><line x1="9" y1="5" x2="9" y2="19" stroke-width="1.5"/></svg>
+            </div>
+            <div class="p-2.5">
+              <p class="text-xs font-medium text-stone-700 line-clamp-2 leading-tight">Rack para TV 65" com LED</p>
+              <p class="text-amber-700 font-display font-bold text-sm mt-1">R$ 780</p>
+            </div>
+          </div>
+          <div onclick="mostrarTela('detalhe-do-anuncio')" class="shrink-0 w-36 card cursor-pointer snap-start">
+            <div class="aspect-square bg-gradient-to-br from-stone-100 to-amber-100 rounded-t-2xl flex items-center justify-center">
+              <svg class="w-10 h-10 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 17l6-6 4 4 6-6" stroke-width="1.5"/><rect x="3" y="3" width="18" height="18" rx="3" stroke-width="1.5"/></svg>
+            </div>
+            <div class="p-2.5">
+              <p class="text-xs font-medium text-stone-700 line-clamp-2 leading-tight">Poltrona Decorativa Veludo</p>
+              <p class="text-amber-700 font-display font-bold text-sm mt-1">R$ 950</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-5 border-t border-stone-100"></div>
+
+      <!-- Avaliações -->
+      <div class="px-5 py-5">
+        <h2 class="font-display font-bold text-stone-800 text-base mb-3">Avaliações do vendedor</h2>
+        <div class="space-y-3">
+          <div class="flex gap-3">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white font-display font-bold text-xs shrink-0">AR</div>
+            <div class="flex-1">
+              <div class="flex items-center gap-2">
+                <p class="text-sm font-medium text-stone-700">Ana Ribeiro</p>
+                <span class="text-xs text-stone-400">há 2 semanas</span>
+              </div>
+              <div class="flex gap-0.5 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+              <p class="text-xs text-stone-500 mt-1">Produto chegou perfeito, exatamente como nas fotos. Vendedor muito atencioso!</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-rose-400 to-pink-600 flex items-center justify-center text-white font-display font-bold text-xs shrink-0">FS</div>
+            <div class="flex-1">
+              <div class="flex items-center gap-2">
+                <p class="text-sm font-medium text-stone-700">Fernanda Silva</p>
+                <span class="text-xs text-stone-400">há 1 mês</span>
+              </div>
+              <div class="flex gap-0.5 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+              <p class="text-xs text-stone-500 mt-1">Entrega rápida e produto impecável. Recomendo!</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-white font-display font-bold text-xs shrink-0">PL</div>
+            <div class="flex-1">
+              <div class="flex items-center gap-2">
+                <p class="text-sm font-medium text-stone-700">Pedro Lima</p>
+                <span class="text-xs text-stone-400">há 2 meses</span>
+              </div>
+              <div class="flex gap-0.5 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="w-3.5 h-3.5 text-stone-300" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+              <p class="text-xs text-stone-500 mt-1">Ótima experiência! Comunicação rápida e produto conforme combinado.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-24"></div>
+
+      <script>
+        let detalhe_do_anuncio_favoritado = false;
+        let detalhe_do_anuncio_indice_carrossel = 0;
+        const detalhe_do_anuncio_total_fotos = 5;
+
+        function detalhe_do_anuncio_carrossel_ant() {
+          const el = document.getElementById('carrossel-fotos');
+          const w = el.clientWidth;
+          detalhe_do_anuncio_indice_carrossel = Math.max(0, detalhe_do_anuncio_indice_carrossel - 1);
+          el.scrollTo({ left: detalhe_do_anuncio_indice_carrossel * w, behavior:'smooth' });
+          detalhe_do_anuncio_atualizar_indicadores();
+        }
+
+        function detalhe_do_anuncio_carrossel_prox() {
+          const el = document.getElementById('carrossel-fotos');
+          const w = el.clientWidth;
+          detalhe_do_anuncio_indice_carrossel = Math.min(detalhe_do_anuncio_total_fotos - 1, detalhe_do_anuncio_indice_carrossel + 1);
+          el.scrollTo({ left: detalhe_do_anuncio_indice_carrossel * w, behavior:'smooth' });
+          detalhe_do_anuncio_atualizar_indicadores();
+        }
+
+        function detalhe_do_anuncio_atualizar_indicadores() {
+          const el = document.getElementById('carrossel-fotos');
+          const w = el.clientWidth;
+          const idx = Math.round(el.scrollLeft / w);
+          detalhe_do_anuncio_indice_carrossel = idx;
+          const cont = document.getElementById('carrossel-indicadores');
+          cont.innerHTML = '';
+          for (let i = 0; i < detalhe_do_anuncio_total_fotos; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'w-1.5 h-1.5 rounded-full transition-all ' + (i === idx ? 'bg-white w-4' : 'bg-white/50');
+            cont.appendChild(dot);
+          }
+        }
+
+        function detalhe_do_anuncio_alternar_favorito() {
+          detalhe_do_anuncio_favoritado = !detalhe_do_anuncio_favoritado;
+          const btn = document.getElementById('btn-favorito');
+          const icone = document.getElementById('icone-favorito');
+          if (detalhe_do_anuncio_favoritado) {
+            icone.setAttribute('fill', '#e11d48');
+            icone.classList.remove('text-stone-400');
+            icone.classList.add('text-rose-500');
+            btn.classList.add('border-rose-300', 'bg-rose-50');
+            toast('Adicionado aos favoritos', 'ok');
+          } else {
+            icone.setAttribute('fill', 'none');
+            icone.classList.remove('text-rose-500');
+            icone.classList.add('text-stone-400');
+            btn.classList.remove('border-rose-300', 'bg-rose-50');
+            toast('Removido dos favoritos', 'info');
+          }
+        }
+
+        function detalhe_do_anuncio_abrir_compra() {
+          abrirModal(
+            '<div class="text-center py-4">' +
+              '<div class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">' +
+                '<svg class="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>' +
+              '</div>' +
+              '<h3 class="font-display font-bold text-lg text-stone-800 mb-1">Confirmar Compra</h3>' +
+              '<p class="text-stone-500 text-sm mb-4">Sofá Retrátil 3 Lugares</p>' +
+              '<p class="text-amber-700 font-display font-bold text-xl mb-5">R$ 2.890</p>' +
+              '<div class="bg-stone-50 rounded-xl p-3 mb-5 text-left">' +
+                '<p class="text-xs text-stone-500 mb-2">Forma de pagamento</p>' +
+                '<label class="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-stone-200 mb-2 cursor-pointer">' +
+                  '<input type="radio" name="pgto" checked class="accent-emerald-600">' +
+                  '<svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"/></svg>' +
+                  '<span class="text-sm text-stone-700">Pix</span>' +
+                '</label>' +
+                '<label class="flex items-center gap-2 p-2.5 bg-white rounded-lg border border-stone-200 cursor-pointer">' +
+                  '<input type="radio" name="pgto" class="accent-emerald-600">' +
+                  '<svg class="w-4 h-4 text-stone-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 002-2V6a2 2 0 00-2-2H4z" clip-rule="evenodd"/></svg>' +
+                  '<span class="text-sm text-stone-700">Cartão de crédito</span>' +
+                '</label>' +
+              '</div>' +
+              '<button onclick="detalhe_do_anuncio_confirmar_compra(); fecharModal();" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-display font-bold py-3.5 rounded-2xl active:scale-95 transition-all shadow-lg shadow-emerald-200">Confirmar Pedido</button>' +
+              '<button onclick="fecharModal()" class="w-full text-stone-400 text-sm mt-3 py-2">Cancelar</button>' +
+            '</div>',
+            'Confirmar compra'
+          );
+        }
+
+        function detalhe_do_anuncio_confirmar_compra() {
+          mostrarTela('pedidos-e-acompanhamento');
+          toast('Pedido realizado com sucesso!', 'ok');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+          const scrollEl = document.getElementById('carrossel-fotos');
+          if (scrollEl) {
+            scrollEl.addEventListener('scroll', function() {
+              const w = scrollEl.clientWidth;
+              const idx = Math.round(scrollEl.scrollLeft / w);
+              detalhe_do_anuncio_indice_carrossel = idx;
+              detalhe_do_anuncio_atualizar_indicadores();
+            }, { passive: true });
+          }
+        });
+      </script>
+    </section>
+
     <!-- TELAS -->
     </main>
 
